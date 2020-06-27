@@ -163,13 +163,11 @@ select {
 .half1 {
   display: inline-block;
   width: 45%;
-  margin: auto;
 }
 
 .half2 {
   display: inline-block;
   width: 45%;
-  margin: auto;
 }
 
 #pass {
