@@ -1,0 +1,270 @@
+input {
+  outline: none;
+  border: none;
+  padding-left: 35px;
+}
+
+input::placeholder {
+  color: #fff;
+  padding-left: 5%;
+}
+
+button {
+  border: none;
+  background: transparent;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap {
+  width: 70%;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 5% 5%;
+  background: #ede3fd;
+  background: linear-gradient(top, #7579ff, #b224ef);
+}
+
+.form {
+  width: 100%;
+}
+
+.logo {
+  font-size: 60px;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+#round {
+  border-radius: 50%;
+  width: 90%;
+  height: 90%;
+}
+
+.title {
+  font-family: Arial;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.header {
+  font-family: "Comic Sans Ms";
+  font-size: 30px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  margin-top: 15px;
+  color: grey;
+}
+
+.headerbottom {
+  font-family: "Times New Roman";
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  margin-top: 7px;
+  color: grey;
+}
+
+.wrap-input {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid #fff;
+  margin-bottom: 20px;
+}
+
+.inputwrapper {
+  width: 100%;
+  position: relative;
+}
+
+.inputwrapper input {
+  border-bottom: 3px solid #fff;
+  margin-bottom: 20px;
+  background: transparent;
+  color: #fff;
+  width: 89%;
+}
+
+.inputwrapper input::placeholder {
+  color: white;
+}
+
+.inputwrapper select {
+  width: 100%;
+}
+
+select {
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+.input-login {
+  font-family: Poppins-Regular;
+  font-size: 16px;
+  color: grey;
+  line-height: 1.2;
+  width: 100%;
+  background: transparent;
+  height: 35px;
+}
+.input-login::placeholder {
+  color: lightgrey;
+  opacity: 1;
+}
+
+#user {
+  background: url("https://www.iconsdb.com/icons/preview/white/user-xxl.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+
+#mail {
+  background: transparent;
+  background: url("https://www.iconsdb.com/icons/preview/white/mail-xxl.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+.half-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.half1 {
+  display: inline-block;
+  width: 45%;
+  margin: auto;
+}
+
+.half2 {
+  display: inline-block;
+  width: 45%;
+  margin: auto;
+}
+
+#pass {
+  background: url("https://www.iconsdb.com/icons/preview/white/key-6-xxl.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+}
+
+.btn {
+  margin-top: 6px;
+  font-family: Poppins-Medium;
+  font-size: 16px;
+  color: #555555;
+  line-height: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 120px;
+  height: 50px;
+  border-radius: 25px;
+  background: #fff;
+  background: linear-gradient(bottom, #7579ff, #b224ef);
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s;
+}
+
+.btn:hover {
+  color: white;
+  background-color: grey;
+}
+
+a {
+  text-decoration: none;
+}
+
+.list-prihod {
+  padding: 1%;
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  box-shadow: 5px 5px grey;
+}
+.list-rashod {
+  padding: 1%;
+  background: linear-gradient(to right, #ed213a, #93291e);
+  box-shadow: 5px 5px grey;
+}
+
+.input-number-prihod {
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  color: white;
+  border: solid #38ef7d;
+}
+.ukupan-prihod {
+  color: #11998e;
+  margin: auto;
+  font-size: 3em;
+}
+
+.ukupan-rashod {
+  font-size: 3em;
+  color: red;
+}
+
+.input-number-rashod {
+  background: linear-gradient(to right, #ed213a, #93291e);
+  color: white;
+  border: solid #ed213a;
+}
+
+.container-btn {
+  width: 100%;
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 3em;
+}
+.red {
+  color: #93291e;
+}
+.green {
+  color: #38ef7d;
+}
+
+.total {
+  font-size: 2em;
+  font-weight: 200;
+  font-family: "Comic Sans MS", curisive, sans-serif;
+}
+.chart-wrap-expense {
+  background-color: white;
+  box-shadow: 1px 1px 20px red inset;
+}
+.chart-wrap-income {
+  background-color: white;
+  box-shadow: 1px 1px 20px green inset;
+}
