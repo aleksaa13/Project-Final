@@ -173,18 +173,18 @@ class Prihodi extends React.Component {
   render() {
     return (
       //
-      <React.Fragment>
+      <div className='component-wrap'>
         <form onSubmit={this.onFormSubmit}>
-          <div className="ui card">
+          <div className="ui card centralize">
             <div className="content">
               <div className="header">Prihod</div>
             </div>
-            <div className="content">
-              <h4 className="ui sub header">Unesite detalje prihoda</h4>
+            <div className="content centralize">
+              <h4 style={{textAlign:'center'}} className="ui sub header">Unesite detalje prihoda</h4>
               <div className="ui small feed">
                 <div className="event">
                   <div className="content">
-                    <div className="summary">
+                    <div className="summary centralize">
                       <select
                         className="ui dropdown"
                         name="kategorijaprihoda"
@@ -201,7 +201,7 @@ class Prihodi extends React.Component {
                 </div>
                 <div className="event">
                   <div className="content">
-                    <div className="summary">
+                    <div className="summary centralize">
                       <div className="ui input">
                         <input
                           type="text"
@@ -216,16 +216,16 @@ class Prihodi extends React.Component {
                 </div>
                 <div className="event">
                   <div className="content">
-                    <div className="summary">
+                    
                       <input
                         className="input-number-prihod"
                         type="number"
                         name="vrijednostprihoda"
-                        placeholder="Vrijednost prihoda"
+                        placeholder="Unesite vrijednost"
                         onChange={this.onInputChange}
                         value={this.state.vrijednostprihoda}
                       />
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -268,9 +268,10 @@ class Prihodi extends React.Component {
             }}
             options={{}}
           />
-        </div>
+        
         <div className="list-prihod">{this.handleIncome()}</div>
-      </React.Fragment>
+      </div>
+      </div>
     );
   }
 }

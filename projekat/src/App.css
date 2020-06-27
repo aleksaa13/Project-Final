@@ -25,7 +25,7 @@ button:hover {
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
 }
@@ -162,6 +162,8 @@ select {
 }
 .half1 {
   display: inline-block;
+  align-items:center;
+  justify-content:center;
   width: 45%;
   padding:1%;
 }
@@ -222,6 +224,7 @@ a {
   background: linear-gradient(to right, #11998e, #38ef7d);
   color: white;
   border: solid #38ef7d;
+  height:130%;
 }
 .ukupan-prihod {
   color: #11998e;
@@ -238,6 +241,7 @@ a {
   background: linear-gradient(to right, #ed213a, #93291e);
   color: white;
   border: solid #ed213a;
+  height:130%;
 }
 
 .container-btn {
@@ -267,4 +271,16 @@ a {
 .chart-wrap-income {
   background-color: white;
   box-shadow: 1px 1px 20px green inset;
+}
+.component-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+.centralize{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
 }

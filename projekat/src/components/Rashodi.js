@@ -172,18 +172,18 @@ class Rashodi extends React.Component {
   }
   render() {
     return (
-      <React.Fragment>
+      <div className='component-wrap'>
         <form onSubmit={this.onFormSubmit}>
-          <div className="ui card">
+          <div className="ui card centralize">
             <div className="content">
               <div className="header">Rashod</div>
             </div>
-            <div className="content">
-              <h4 className="ui sub header">Unesite detalje rashoda</h4>
+            <div className="content centarlize">
+              <h4 style={{textAlign:'center'}} className="ui sub header">Unesite detalje rashoda</h4>
               <div className="ui small feed">
                 <div className="event">
                   <div className="content">
-                    <div className="summary">
+                    <div className="summary centralize">
                       <select
                         className="ui dropdown"
                         name="kategorijarashoda"
@@ -200,7 +200,7 @@ class Rashodi extends React.Component {
                 </div>
                 <div className="event">
                   <div className="content">
-                    <div className="summary">
+                    <div className="summary centralize">
                       <div className="ui input">
                         <input
                           type="text"
@@ -215,16 +215,16 @@ class Rashodi extends React.Component {
                 </div>
                 <div className="event">
                   <div className="content">
-                    <div className="summary">
+                    
                       <input
                         className="input-number-rashod"
                         type="number"
                         name="vrijednostrashoda"
-                        placeholder="Vrijednost rashoda"
+                        placeholder="Unesite vrijednost"
                         onChange={this.onInputChange}
                         value={this.state.vrijednostrashoda}
                       />
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -268,9 +268,10 @@ class Rashodi extends React.Component {
             }}
             options={{}}
           />
-        </div>
+        
         <div className="list-rashod">{this.handleExpense()}</div>
-      </React.Fragment>
+      </div>
+      </div>
     );
   }
 }
