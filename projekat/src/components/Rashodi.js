@@ -234,7 +234,7 @@ class Rashodi extends React.Component {
                 Dodaj Rashod
               </button>
             </div>
-            <div className="list-rashod">{this.handleExpense()}</div>
+            
           </div>
           <p>
             <span className="total">Ukupan rashod:</span>
@@ -269,6 +269,7 @@ class Rashodi extends React.Component {
             options={{}}
           />
         </div>
+        <div className="list-rashod">{this.handleExpense()}</div>
       </React.Fragment>
     );
   }

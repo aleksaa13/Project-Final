@@ -235,7 +235,6 @@ class Prihodi extends React.Component {
                 Dodaj Prihod
               </button>
             </div>
-            <div className="list-prihod">{this.handleIncome()}</div>
           </div>
           <p>
             <span className="total">Ukupan prihod:</span>
@@ -270,6 +269,7 @@ class Prihodi extends React.Component {
             options={{}}
           />
         </div>
+        <div className="list-prihod">{this.handleIncome()}</div>
       </React.Fragment>
     );
   }
