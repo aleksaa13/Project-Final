@@ -4,6 +4,7 @@ import Prihodi from "./Prihodi";
 import Rashodi from "./Rashodi";
 import axios from "axios";
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 
 class Home extends React.Component {
   state = {
@@ -79,7 +80,8 @@ class Home extends React.Component {
             />
           </span>{" "} */}
           <span className="header" style={{ marginBottom: 10 }}>
-            Budzet{" "}
+           
+          {moment().format('MMMM')}
           </span>{" "}
           <div className="half-wrap">
             <div className="half1">

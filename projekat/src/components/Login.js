@@ -7,34 +7,34 @@ class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    error: null
+    error: null,
   };
 
-  onInputChange = event => {
+  onInputChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
-  onFormSubmit = event => {
+  onFormSubmit = (event) => {
     event.preventDefault();
     axios
       .post("https://racunko.herokuapp.com/login", {
         username: this.state.username,
-        password: this.state.password
+        password: this.state.password,
       })
-      .then(response => {
+      .then((response) => {
         console.log(response);
         localStorage.setItem("usertoken", response.data.token);
         localStorage.setItem("username", this.state.username);
         this.props.history.push("/home");
       })
-      .catch(err =>
+      .catch((err) =>
         this.setState({
           username: "",
           password: "",
           email: "",
-          error: "Došlo je do greške. Molimo Vas da pokušate ponovo."
+          error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
         })
       );
     console.log(this.state.username, this.state.password);
@@ -61,7 +61,7 @@ class Login extends React.Component {
               />
             </span>
             <span className="header"> Log in </span>
-            <div className="wrap-input">
+            {/* <div className="wrap-input">
               <input
                 className="input-login"
                 id="user"
@@ -71,8 +71,8 @@ class Login extends React.Component {
                 onChange={this.onInputChange}
                 value={this.state.username}
               />{" "}
-            </div>
-            <div className="wrap-input">
+            </div> */}
+            {/* <div className="wrap-input">
               <input
                 className="input-login"
                 id="pass"
@@ -82,15 +82,42 @@ class Login extends React.Component {
                 onChange={this.onInputChange}
                 value={this.state.password}
               />{" "}
-            </div>{" "}
+            </div>{" "} */}
+            <div className="centralize" style={{ margin: "1%" }}>
+              <div class="ui left icon input login-width">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  id="user"
+                  name="username"
+                  placeholder="Username"
+                  onChange={this.onInputChange}
+                  value={this.state.username}
+                />
+                <i class="users icon"></i>
+              </div>
+            </div>
+            <div className="centralize" style={{ margin: "1%" }}>
+              <div class="ui left icon input login-width">
+                <input
+                  type="password"
+                  id="pass"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.onInputChange}
+                  value={this.state.password}
+                />
+                <i class="key icon"></i>
+              </div>
+            </div>
             <div className="container-btn">
-              <button className="btn"> Login </button>{" "}
+              <button className="ui button"> Login </button>{" "}
             </div>{" "}
             <div>
               <span className="headerbottom"> You don 't have account?</span>{" "}
             </div>{" "}
             <div className="container-btn">
-              <Link to="/signup" className="btn">
+              <Link to="/signup" className="ui button">
                 Signup{" "}
               </Link>{" "}
             </div>{" "}

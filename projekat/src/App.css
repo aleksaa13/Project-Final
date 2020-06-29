@@ -36,7 +36,7 @@ button:hover {
   overflow: hidden;
   padding: 5% 5%;
   background: #ede3fd;
-  background: linear-gradient(top, #7579ff, #b224ef);
+  background-color:#2196F3;
 }
 
 .form {
@@ -74,7 +74,7 @@ button:hover {
 }
 
 .header {
-  font-family: "Comic Sans Ms";
+  font-family: "Arial";
   font-size: 30px;
   text-transform: uppercase;
   display: flex;
@@ -82,7 +82,7 @@ button:hover {
   align-items: center;
   font-style: italic;
   margin-top: 15px;
-  color: grey;
+  color: white;
 }
 
 .headerbottom {
@@ -93,7 +93,7 @@ button:hover {
   align-items: center;
   font-style: italic;
   margin-top: 7px;
-  color: grey;
+  color: white;
 }
 
 .wrap-input {
@@ -142,19 +142,6 @@ select {
   color: lightgrey;
   opacity: 1;
 }
-
-#user {
-  background: url("https://www.iconsdb.com/icons/preview/white/user-xxl.png");
-  background-repeat: no-repeat;
-  background-size: 30px;
-}
-
-#mail {
-  background: transparent;
-  background: url("https://www.iconsdb.com/icons/preview/white/mail-xxl.png");
-  background-repeat: no-repeat;
-  background-size: 30px;
-}
 .half-wrap {
   display: flex;
   flex-direction: row;
@@ -172,12 +159,6 @@ select {
   display: inline-block;
   width: 45%;
   padding:1%;
-}
-
-#pass {
-  background: url("https://www.iconsdb.com/icons/preview/white/key-6-xxl.png");
-  background-repeat: no-repeat;
-  background-size: 30px;
 }
 
 .btn {
@@ -283,4 +264,10 @@ a {
   flex-direction:column;
   align-items: center;
   justify-content: center;
+}
+.login-width{
+  width:70%;
+}
+.login-inputs-wrap>input{
+  background-color:white;
 }

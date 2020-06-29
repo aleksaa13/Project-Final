@@ -58,8 +58,9 @@ class Signup extends React.Component {
               />
             </span>{" "}
             <span className="header"> Sign up </span>{" "}
-            <div className="wrap-input">
-              <input
+            <div className="centralize" style={{ margin: "1%" }}>
+              <div class="ui left icon input login-width">
+                <input
                 className="input-login"
                 id="mail"
                 type="email"
@@ -67,32 +68,36 @@ class Signup extends React.Component {
                 placeholder="Email"
                 onChange={this.onInputChange}
                 value={this.state.email}
-              />{" "}
-            </div>{" "}
-            <div className="wrap-input">
-              <input
-                className="input-login"
-                id="user"
-                type="text"
-                name="username"
-                placeholder="Username"
-                onChange={this.onInputChange}
-                value={this.state.username}
-              />{" "}
-            </div>{" "}
-            <div className="wrap-input">
-              <input
-                className="input-login"
-                id="pass"
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={this.onInputChange}
-                value={this.state.password}
-              />{" "}
-            </div>{" "}
+              /><i class="mail icon"></i>
+              </div>
+            </div>
+            <div className="centralize" style={{ margin: "1%" }}>
+              <div class="ui left icon input login-width">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  id="user"
+                  name="username"
+                  placeholder="Username"
+                  onChange={this.onInputChange}
+                  value={this.state.username}
+                />
+                <i class="users icon"></i>
+              </div>
+            </div>
+            <div className='centralize' style={{margin:'1%'}}>
+            <div class="ui left icon input login-width">
+  <input type="password"
+  id="pass"
+  name="password"
+  placeholder="Password"
+  onChange={this.onInputChange}
+  value={this.state.password}/>
+  <i class="key icon"></i>
+</div>
+</div>
             <div className="container-btn">
-              <button className="btn"> Signup </button>{" "}
+              <button className="ui button"> Signup </button>{" "}
             </div>{" "}
           </form>{" "}
           {this.renderError()}
