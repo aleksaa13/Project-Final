@@ -31,7 +31,9 @@ class Rashodi extends React.Component {
           ? (odjeca = odjeca + parseInt(el.amount))
           : el.category === "edukacija"
           ? (edukacija = edukacija + parseInt(el.amount))
-          : (transport = transport + parseInt(el.amount));
+          :el.category === 'transport'
+          ? (transport = transport + parseInt(el.amount))
+          : console.log('aleksa');
       }
     });
     console.log(transport);

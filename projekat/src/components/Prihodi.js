@@ -31,9 +31,12 @@ class Prihodi extends React.Component {
           ? (honorar = honorar + parseInt(el.amount))
           : el.category === "poklon"
           ? (poklon = poklon + parseInt(el.amount))
-          : (renta = renta + parseInt(el.amount));
-      }
-    });
+          : el.category==='renta' 
+          ? (renta = renta + parseInt(el.amount))
+          : console.log('aleska')
+    }
+  });
+  
     console.log(plata);
     console.log(poklon);
     console.log(honorar);
@@ -123,9 +126,10 @@ class Prihodi extends React.Component {
           ? this.setState({
               poklon: this.state.poklon + parseInt(prihod1.amount)
             })
-          : this.setState({
+          : 
+          this.setState({
               renta: this.state.renta + parseInt(prihod1.amount)
-            });
+              });
         this.setState({
           sviprihodi: [...this.state.sviprihodi, prihod1],
           prihod: "prihod",
