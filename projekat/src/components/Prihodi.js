@@ -100,10 +100,10 @@ class Prihodi extends React.Component {
       })
       .then((response) => {
         const prihod1 = {
-          id: this.state.sviprihodi.length + 1,
+          _id: response.data._id,
           category: this.state.kategorijaprihoda,
           description: this.state.opisprihoda,
-          amount: this.state.vrijednostprihoda,
+          amount: Number(this.state.vrijednostprihoda),
         };
         this.props.podesiPrihod(this.state.vrijednostprihoda);
 
