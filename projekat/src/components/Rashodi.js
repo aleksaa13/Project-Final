@@ -33,12 +33,9 @@ class Rashodi extends React.Component {
           ? (edukacija = edukacija + parseInt(el.amount))
           :el.category === 'transport'
           ? (transport = transport + parseInt(el.amount))
-          : console.log('aleksa');
+          : console.log('micko');
       }
     });
-    console.log(transport);
-    console.log(edukacija);
-    console.log(odjeca);
     this.setState({
       hrana: hrana,
       odjeca: odjeca,
@@ -59,7 +56,7 @@ class Rashodi extends React.Component {
         }
       )
       .then(response => {
-        console.log(response.data);
+        
         this.mapIncome(response.data);
         const postojecirahodi = response.data.filter(function(rashod) {
           return rashod.property === "rashod";
@@ -71,7 +68,7 @@ class Rashodi extends React.Component {
         for (var i = 0; i < this.state.svirashodi.length; i++) {
           vrijednost = vrijednost + this.state.svirashodi[i].amount;
         }
-        console.log(vrijednost);
+        
         this.setState({
           ukupanRashod: vrijednost
         });
@@ -89,7 +86,7 @@ class Rashodi extends React.Component {
     event.preventDefault();
     const usertoken = localStorage.getItem("usertoken");
     const username = localStorage.getItem("username");
-    console.log(usertoken);
+    
 
     //const headers = { Authorization: "Bearer " + usertoken };
     axios
@@ -107,7 +104,7 @@ class Rashodi extends React.Component {
         }
       )
       .then(response => {
-        console.log(response);
+        
         const rashod1 = {
           id: this.state.svirashodi.length + 1,
           category: this.state.kategorijarashoda,
@@ -115,7 +112,7 @@ class Rashodi extends React.Component {
           amount: this.state.vrijednostrashoda
         };
         this.props.podesiRashod(this.state.vrijednostrashoda);
-        console.log(this.state.vrijednostrashoda);
+        
         rashod1.category === "transport"
           ? this.setState({
               transport: this.state.transport + parseInt(rashod1.amount)
@@ -152,22 +149,48 @@ class Rashodi extends React.Component {
       );
   };
 
+  deleteExpense = (e) => {
+    const id = e.target.id;
+    const novisvirashodi = this.state.svirashodi.filter(function (rashod) {
+      return rashod._id !== id;
+    });
+    this.setState({
+      svirashodi: novisvirashodi,
+    });
+    
+    var vrijednost = 0;
+    for (var i = 0; i < novisvirashodi.length; i++) {
+      vrijednost = vrijednost + parseInt(novisvirashodi[i].amount);
+    }
+    var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
+    this.setState({
+      ukupanRashod: vrijednost,
+    });
+    this.props.podesiRashod(umanjenje);
+    this.mapIncome(this.state.svirashodi);
+  };
   handleExpense() {
-    console.log(this.state.svirashodi);
-    const listItems = this.state.svirashodi.map(rashod => (
-      <div key={rashod.id} className="ui items">
+    const listItems = this.state.svirashodi.map((rashod) => (
+      <div key={rashod._id} className="ui items">
         <div className="item">
           <div className="content">
             <div className="header">
-              {rashod.amount}
-              {`\u20AC`}
-            </div>
+              {" "}
+              {rashod.amount} {`\u20AC`}{" "}
+            </div>{" "}
             <div className="meta">
-              <span className="price">{rashod.category}</span>/
-              <span className="price">{rashod.description}</span>
-            </div>
-          </div>
-        </div>
+              <span className="price"> {rashod.category} </span>/{" "}
+              <span className="price"> {rashod.description} </span>{" "}
+              <button
+                type="button"
+                id={rashod._id}
+                onClick={this.deleteExpense}
+              >
+                Obrisi rashod
+              </button>
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
       </div>
     ));
     return listItems;
