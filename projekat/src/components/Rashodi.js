@@ -3,6 +3,7 @@ import "../../src/App.css";
 import "../../src/App.css";
 import axios from "axios";
 import { Pie } from "react-chartjs-2";
+import moment from "moment";
 
 class Rashodi extends React.Component {
   state = {
@@ -16,14 +17,14 @@ class Rashodi extends React.Component {
     hrana: 0,
     transport: 0,
     edukacija: 0,
-    odjeca: 0
+    odjeca: 0,
   };
-  mapIncome = incomes => {
+  mapIncome = (incomes) => {
     let hrana = 0;
     let odjeca = 0;
     let transport = 0;
     let edukacija = 0;
-    incomes.map(el => {
+    incomes.map((el) => {
       {
         el.category === "hrana"
           ? (hrana = hrana + parseInt(el.amount))
@@ -31,56 +32,58 @@ class Rashodi extends React.Component {
           ? (odjeca = odjeca + parseInt(el.amount))
           : el.category === "edukacija"
           ? (edukacija = edukacija + parseInt(el.amount))
-          :el.category === 'transport'
+          : el.category === "transport"
           ? (transport = transport + parseInt(el.amount))
-          : console.log('micko');
+          : console.log("micko");
       }
     });
     this.setState({
       hrana: hrana,
       odjeca: odjeca,
       edukacija: edukacija,
-      transport: transport
+      transport: transport,
     });
   };
 
   componentDidMount() {
     const username = localStorage.getItem("username");
-
+    let dateString = moment().format("ll");
+    let mjesec = dateString.slice(0, 3);
+    let godina = dateString.slice(7);
     axios
       .post(
-        "https://racunko.herokuapp.com/items",
+        "https://racunko.herokuapp.com/filter",
 
         {
-          username: username
+          username: username,
+          month: mjesec,
+          year: godina,
         }
       )
-      .then(response => {
-             
+      .then((response) => {
         this.mapIncome(response.data);
-        const postojecirahodi = response.data.filter(function(rashod) {
+        const postojecirahodi = response.data.filter(function (rashod) {
           return rashod.property === "rashod";
         });
         this.setState({
-          svirashodi: postojecirahodi
+          svirashodi: postojecirahodi,
         });
         var vrijednost = 0;
         for (var i = 0; i < this.state.svirashodi.length; i++) {
           vrijednost = vrijednost + this.state.svirashodi[i].amount;
         }
-        
+
         this.setState({
-          ukupanRashod: vrijednost
+          ukupanRashod: vrijednost,
         });
         this.props.podesiRashod(vrijednost);
       })
 
-      .catch(err => console.log(err));
-      
+      .catch((err) => console.log(err));
   }
-  onInputChange = event => {
+  onInputChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
   onFormSubmit = (event) => {
@@ -129,18 +132,15 @@ class Rashodi extends React.Component {
     } else {
       //const headers = { Authorization: "Bearer " + usertoken };
       axios
-        .post(
-          "https://racunko.herokuapp.com/add",
-          {
-            username: username,
-            item: {
-              property: this.state.rashod,
-              amount: this.state.vrijednostrashoda,
-              category: this.state.kategorijarashoda,
-              description: this.state.opisrashoda,
-            },
-          }
-        )
+        .post("https://racunko.herokuapp.com/add", {
+          username: username,
+          item: {
+            property: this.state.rashod,
+            amount: this.state.vrijednostrashoda,
+            category: this.state.kategorijarashoda,
+            description: this.state.opisrashoda,
+          },
+        })
         .then((response) => {
           console.log(response);
           const rashod1 = {
@@ -205,7 +205,7 @@ class Rashodi extends React.Component {
     this.setState({
       svirashodi: novisvirashodi,
     });
-    
+
     var vrijednost = 0;
     for (var i = 0; i < novisvirashodi.length; i++) {
       vrijednost = vrijednost + parseInt(novisvirashodi[i].amount);
@@ -214,15 +214,14 @@ class Rashodi extends React.Component {
     // const obrisaniRashod=this.state.svirashodi.filter((items)=>{
     //   return items._id === id;
     // });
-    
-    // obrisaniRashod.category==='transport' ? 
-    // this.setState({transport:this.state.transport-parseInt(obrisaniRashod.amount)}) :
-    //  obrisaniRashod.category==='odjeca' ?  
-    //  this.setState({odjeca:this.state.odjeca-parseInt(obrisaniRashod.amount)}) :
-    //  obrisaniRashod.category==='edukacija' ?  
-    //  this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
-    //  this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)}) 
 
+    // obrisaniRashod.category==='transport' ?
+    // this.setState({transport:this.state.transport-parseInt(obrisaniRashod.amount)}) :
+    //  obrisaniRashod.category==='odjeca' ?
+    //  this.setState({odjeca:this.state.odjeca-parseInt(obrisaniRashod.amount)}) :
+    //  obrisaniRashod.category==='edukacija' ?
+    //  this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
+    //  this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)})
 
     var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
     this.setState({
@@ -259,14 +258,16 @@ class Rashodi extends React.Component {
   }
   render() {
     return (
-      <div className='component-wrap'>
+      <div className="component-wrap">
         <form onSubmit={this.onFormSubmit}>
           <div className="ui card centralize">
             <div className="content">
               <div className="header">Rashod</div>
             </div>
             <div className="content centarlize">
-              <h4 style={{textAlign:'center'}} className="ui sub header">Unesite detalje rashoda</h4>
+              <h4 style={{ textAlign: "center" }} className="ui sub header">
+                Unesite detalje rashoda
+              </h4>
               <div className="ui small feed">
                 <div className="event">
                   <div className="content">
@@ -302,16 +303,14 @@ class Rashodi extends React.Component {
                 </div>
                 <div className="event">
                   <div className="content">
-                    
-                      <input
-                        className="input-number-rashod"
-                        type="number"
-                        name="vrijednostrashoda"
-                        placeholder="Unesite vrijednost"
-                        onChange={this.onInputChange}
-                        value={this.state.vrijednostrashoda}
-                      />
-                    
+                    <input
+                      className="input-number-rashod"
+                      type="number"
+                      name="vrijednostrashoda"
+                      placeholder="Unesite vrijednost"
+                      onChange={this.onInputChange}
+                      value={this.state.vrijednostrashoda}
+                    />
                   </div>
                 </div>
               </div>
@@ -321,7 +320,6 @@ class Rashodi extends React.Component {
                 Dodaj Rashod
               </button>
             </div>
-            
           </div>
           <p>
             <span className="total">Ukupan rashod:</span>
@@ -341,23 +339,23 @@ class Rashodi extends React.Component {
                     this.state.transport,
                     this.state.odjeca,
                     this.state.edukacija,
-                    this.state.hrana
+                    this.state.hrana,
                   ],
                   backgroundColor: ["#ffc2c3", "#fe7773", "#e81e25", "#0e0301"],
                   hoverBackgroundColor: [
                     "#bfe6ff",
                     "#bfe6ff",
                     "#bfe6ff",
-                    "#bfe6ff"
-                  ]
-                }
-              ]
+                    "#bfe6ff",
+                  ],
+                },
+              ],
             }}
             options={{}}
           />
-        
-        <div className="list-rashod">{this.handleExpense()}</div>
-      </div>
+
+          <div className="list-rashod">{this.handleExpense()}</div>
+        </div>
       </div>
     );
   }

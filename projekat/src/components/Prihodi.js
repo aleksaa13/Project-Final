@@ -2,6 +2,7 @@ import React from "react";
 import "../../src/App.css";
 import axios from "axios";
 import { Pie } from "react-chartjs-2";
+import moment from "moment";
 
 class Prihodi extends React.Component {
   state = {
@@ -44,21 +45,25 @@ class Prihodi extends React.Component {
       renta: renta,
     });
   };
-
   componentDidMount() {
-    const username = localStorage.getItem("username");
+    let dateString = moment().format("ll");
 
+    const username = localStorage.getItem("username");
+    let mjesec = dateString.slice(0, 3);
+    let godina = dateString.slice(7);
     axios
       .post(
-        "https://racunko.herokuapp.com/items",
+        "https://racunko.herokuapp.com/filter",
 
         {
           username: username,
+          month: mjesec,
+          year: godina,
         }
       )
       .then((response) => {
         this.mapIncome(response.data);
-        
+
         const postojeciprihodi = response.data.filter(function (prihod) {
           return prihod.property === "prihod";
         });
@@ -77,14 +82,12 @@ class Prihodi extends React.Component {
         this.props.podesiPrihod(vrijednost);
       })
       .catch((err) => console.log(err));
-      
   }
 
   onInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    
   };
   onFormSubmit = (event) => {
     event.preventDefault();
@@ -221,13 +224,13 @@ class Prihodi extends React.Component {
     //   return items._id === id;
     // });
 
-    // obrisaniPrihod.category==='plata' ? 
+    // obrisaniPrihod.category==='plata' ?
     // this.setState({plata:this.state.plata-parseInt(obrisaniPrihod.amount)}) :
-    //  obrisaniPrihod.category==='renta' ?  
+    //  obrisaniPrihod.category==='renta' ?
     //  this.setState({renta:this.state.renta-parseInt(obrisaniPrihod.amount)}) :
-    //  obrisaniPrihod.category==='honorar' ?  
+    //  obrisaniPrihod.category==='honorar' ?
     //  this.setState({honorar:this.state.honorar-parseInt(obrisaniPrihod.amount)}) :
-    //  this.setState({poklon:this.state.poklon-parseInt(obrisaniPrihod.amount)}) 
+    //  this.setState({poklon:this.state.poklon-parseInt(obrisaniPrihod.amount)})
 
     var umanjenje = vrijednost - this.state.ukupanPrihod;
     this.setState({
@@ -235,7 +238,6 @@ class Prihodi extends React.Component {
     });
     this.props.podesiPrihod(umanjenje);
     this.mapIncome(novisviprihodi);
-    
   };
 
   handleIncome() {

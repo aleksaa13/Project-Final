@@ -273,3 +273,7 @@ a {
 .login-inputs-wrap>input{
   background-color:white;
 }
+
+.wrap-login{
+  margin-top:2% !important;
+}

@@ -21,10 +21,11 @@ class Home extends React.Component {
    getFilterData = (dateString) => {
      let godina = dateString.slice(0, 4);
      let mesec = dateString.slice(5);
+     console.log(mesec);
      let mjesec = moment()
        .month(parseInt(mesec - 1))
        .format("MMM");
-     /* axios */
+     /* axios */console.log(mjesec);
      const username = localStorage.getItem("username");
      axios
        .post("https://racunko.herokuapp.com/filter", {

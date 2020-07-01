@@ -57,7 +57,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="wrap">
+        <div className="wrap wrap-login">
           <form
             autoComplete="off"
             className="form"
