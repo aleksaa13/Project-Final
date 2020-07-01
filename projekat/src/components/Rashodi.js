@@ -189,6 +189,16 @@ class Rashodi extends React.Component {
 
   deleteExpense = (e) => {
     const id = e.target.id;
+    const username = localStorage.getItem("username");
+    axios
+      .delete("https://racunko.herokuapp.com/delete", {
+        username: username,
+        id: id,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
     const novisvirashodi = this.state.svirashodi.filter(function (rashod) {
       return rashod._id !== id;
     });
@@ -201,17 +211,17 @@ class Rashodi extends React.Component {
       vrijednost = vrijednost + parseInt(novisvirashodi[i].amount);
     }
 
-    const obrisaniRashod=this.state.svirashodi.filter((items)=>{
-      return items._id === id;
-    });
+    // const obrisaniRashod=this.state.svirashodi.filter((items)=>{
+    //   return items._id === id;
+    // });
     
-    obrisaniRashod.category==='transport' ? 
-    this.setState({transport:this.state.transport-parseInt(obrisaniRashod.amount)}) :
-     obrisaniRashod.category==='odjeca' ?  
-     this.setState({odjeca:this.state.odjeca-parseInt(obrisaniRashod.amount)}) :
-     obrisaniRashod.category==='edukacija' ?  
-     this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
-     this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)}) 
+    // obrisaniRashod.category==='transport' ? 
+    // this.setState({transport:this.state.transport-parseInt(obrisaniRashod.amount)}) :
+    //  obrisaniRashod.category==='odjeca' ?  
+    //  this.setState({odjeca:this.state.odjeca-parseInt(obrisaniRashod.amount)}) :
+    //  obrisaniRashod.category==='edukacija' ?  
+    //  this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
+    //  this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)}) 
 
 
     var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
@@ -219,7 +229,7 @@ class Rashodi extends React.Component {
       ukupanRashod: vrijednost,
     });
     this.props.podesiRashod(umanjenje);
-    this.mapIncome(this.state.svirashodi);
+    this.mapIncome(novisvirashodi);
   };
   handleExpense() {
     const listItems = this.state.svirashodi.map((rashod) => (

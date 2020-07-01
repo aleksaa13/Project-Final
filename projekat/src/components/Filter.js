@@ -13,13 +13,14 @@ const Filter =(props)=> {
   const rashodi = props.items.filter(rashod => rashod.property==='rashod'
   );
   const plate=prihodi.filter(prihod=>prihod.category==='plata');
-  const honorari=prihodi.filter(prihod=>prihod.category.name==='honorar');
+  const honorari=prihodi.filter(prihod=>prihod.category==='honorar');
   const rente=prihodi.filter(prihod=>prihod.category==='renta');
   const pokloni=prihodi.filter(prihod=>prihod.category==='poklon');
   const transporti=rashodi.filter(prihod=>prihod.category==='transport');
   const hrane=rashodi.filter(prihod=>prihod.category==='hrana');
   const odjece=rashodi.filter(prihod=>prihod.category==='odjeca');
   const edukacije=rashodi.filter(prihod=>prihod.category==='edukacija');
+
   const saberi=(niz)=>{
     let array=niz.map((item)=>{
       return item.amount;
