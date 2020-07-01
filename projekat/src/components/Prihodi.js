@@ -58,6 +58,7 @@ class Prihodi extends React.Component {
       )
       .then((response) => {
         this.mapIncome(response.data);
+        
         const postojeciprihodi = response.data.filter(function (prihod) {
           return prihod.property === "prihod";
         });
@@ -76,12 +77,14 @@ class Prihodi extends React.Component {
         this.props.podesiPrihod(vrijednost);
       })
       .catch((err) => console.log(err));
+      
   }
 
   onInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    
   };
   onFormSubmit = (event) => {
     event.preventDefault();
@@ -214,12 +217,25 @@ class Prihodi extends React.Component {
     for (var i = 0; i < novisviprihodi.length; i++) {
       vrijednost = vrijednost + parseInt(novisviprihodi[i].amount);
     }
+    const obrisaniPrihod=this.state.sviprihodi.filter((items)=>{
+      return items._id === id;
+    });
+
+    obrisaniPrihod.category==='plata' ? 
+    this.setState({plata:this.state.plata-parseInt(obrisaniPrihod.amount)}) :
+     obrisaniPrihod.category==='renta' ?  
+     this.setState({renta:this.state.renta-parseInt(obrisaniPrihod.amount)}) :
+     obrisaniPrihod.category==='honorar' ?  
+     this.setState({honorar:this.state.honorar-parseInt(obrisaniPrihod.amount)}) :
+     this.setState({poklon:this.state.poklon-parseInt(obrisaniPrihod.amount)}) 
+
     var umanjenje = vrijednost - this.state.ukupanPrihod;
     this.setState({
       ukupanPrihod: vrijednost,
     });
     this.props.podesiPrihod(umanjenje);
     this.mapIncome(this.state.sviprihodi);
+    
   };
 
   handleIncome() {

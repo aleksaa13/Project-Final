@@ -56,7 +56,7 @@ class Rashodi extends React.Component {
         }
       )
       .then(response => {
-        
+             
         this.mapIncome(response.data);
         const postojecirahodi = response.data.filter(function(rashod) {
           return rashod.property === "rashod";
@@ -76,6 +76,7 @@ class Rashodi extends React.Component {
       })
 
       .catch(err => console.log(err));
+      
   }
   onInputChange = event => {
     this.setState({
@@ -199,6 +200,20 @@ class Rashodi extends React.Component {
     for (var i = 0; i < novisvirashodi.length; i++) {
       vrijednost = vrijednost + parseInt(novisvirashodi[i].amount);
     }
+
+    const obrisaniRashod=this.state.svirashodi.filter((items)=>{
+      return items._id === id;
+    });
+    
+    obrisaniRashod.category==='transport' ? 
+    this.setState({transport:this.state.transport-parseInt(obrisaniRashod.amount)}) :
+     obrisaniRashod.category==='odjeca' ?  
+     this.setState({odjeca:this.state.odjeca-parseInt(obrisaniRashod.amount)}) :
+     obrisaniRashod.category==='edukacija' ?  
+     this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
+     this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)}) 
+
+
     var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
     this.setState({
       ukupanRashod: vrijednost,
