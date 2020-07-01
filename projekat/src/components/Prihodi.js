@@ -87,61 +87,104 @@ class Prihodi extends React.Component {
     event.preventDefault();
     const username = localStorage.getItem("username");
     const usertoken = localStorage.getItem("usertoken");
-
-    axios
-      .post("https://racunko.herokuapp.com/add", {
-        username: username,
-        item: {
-          property: this.state.prihod,
-          amount: this.state.vrijednostprihoda,
-          category: this.state.kategorijaprihoda,
-          description: this.state.opisprihoda,
-        },
-      })
-      .then((response) => {
-        const prihod1 = {
-          _id: response.data._id,
-          category: this.state.kategorijaprihoda,
-          description: this.state.opisprihoda,
-          amount: Number(this.state.vrijednostprihoda),
-        };
-        this.props.podesiPrihod(this.state.vrijednostprihoda);
-
-        prihod1.category === "plata"
-          ? this.setState({
-              plata: this.state.plata + parseInt(prihod1.amount),
-            })
-          : prihod1.category === "honorar"
-          ? this.setState({
-              honorar: this.state.honorar + parseInt(prihod1.amount),
-            })
-          : prihod1.category === "poklon"
-          ? this.setState({
-              poklon: this.state.poklon + parseInt(prihod1.amount),
-            })
-          : this.setState({
-              renta: this.state.renta + parseInt(prihod1.amount),
-            });
-        this.setState({
-          sviprihodi: [...this.state.sviprihodi, prihod1],
-          prihod: "prihod",
-          kategorijaprihoda: "plata",
-          opisprihoda: "",
-          ukupanPrihod:
-            this.state.ukupanPrihod + parseInt(this.state.vrijednostprihoda),
-          vrijednostprihoda: "",
-        });
-      })
-      .catch((err) =>
-        this.setState({
-          prihod: "prihod",
-          kategorijaprihoda: "plata",
-          opisprihoda: "",
-          vrijednostprihoda: "",
-          error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
+    console.log(username);
+    console.log(this.state.opisprihoda.length);
+    console.log(isNaN(this.state.vrijednostprihoda));
+    if (isNaN(this.state.vrijednostprihoda)) {
+      this.setState({
+        prihod: "prihod",
+        kategorijaprihoda: "plata",
+        opisprihoda: "",
+        vrijednostprihoda: "",
+      });
+      alert("Vrijednost prihoda mora biti broj");
+    } else if (this.state.opisprihoda.length > 20) {
+      alert("Opis prihoda može imati maksimum 20 karaktera");
+      this.setState({
+        prihod: "prihod",
+        kategorijaprihoda: "plata",
+        opisprihoda: "",
+        vrijednostprihoda: "",
+      });
+    } else if (
+      this.state.vrijednostprihoda === "" ||
+      this.state.vrijednostprihoda === null ||
+      this.state.vrijednostprihoda === 0
+    ) {
+      alert("Morate unijeti vrijednost");
+      this.setState({
+        prihod: "prihod",
+        kategorijaprihoda: "plata",
+        opisprihoda: "",
+        vrijednostprihoda: "",
+      });
+    } else if (
+      this.state.opisprihoda === "" ||
+      this.state.opisprihoda === null
+    ) {
+      alert("Morate unijeti opis");
+      this.setState({
+        prihod: "prihod",
+        kategorijaprihoda: "plata",
+        opisprihoda: "",
+        vrijednostprihoda: "",
+      });
+    } else {
+      axios
+        .post("https://racunko.herokuapp.com/add", {
+          username: username,
+          item: {
+            property: this.state.prihod,
+            amount: this.state.vrijednostprihoda,
+            category: this.state.kategorijaprihoda,
+            description: this.state.opisprihoda,
+          },
         })
-      );
+        .then((response) => {
+          const prihod1 = {
+            _id: response.data._id,
+            category: this.state.kategorijaprihoda,
+            description: this.state.opisprihoda,
+            amount: Number(this.state.vrijednostprihoda),
+          };
+          this.props.podesiPrihod(this.state.vrijednostprihoda);
+          prihod1.category === "plata"
+            ? this.setState({
+                plata: this.state.plata + parseInt(prihod1.amount),
+              })
+            : prihod1.category === "honorar"
+            ? this.setState({
+                honorar: this.state.honorar + parseInt(prihod1.amount),
+              })
+            : prihod1.category === "poklon"
+            ? this.setState({
+                poklon: this.state.poklon + parseInt(prihod1.amount),
+              })
+            : this.setState({
+                renta: this.state.renta + parseInt(prihod1.amount),
+              });
+          this.setState({
+            sviprihodi: [...this.state.sviprihodi, prihod1],
+            prihod: "prihod",
+            kategorijaprihoda: "plata",
+            opisprihoda: "",
+            ukupanPrihod:
+              this.state.ukupanPrihod + Number(this.state.vrijednostprihoda),
+            vrijednostprihoda: "",
+          });
+        })
+        .catch((err) =>
+          this.setState({
+            prihod: "prihod",
+            kategorijaprihoda: "plata",
+            opisprihoda: "",
+            vrijednostprihoda: "",
+            error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
+          })
+        );
+    }
   };
+
   renderError() {
     if (this.state.error) {
       return <h1>{this.state.error}</h1>;

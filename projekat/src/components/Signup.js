@@ -7,7 +7,12 @@ class Signup extends React.Component {
     email: "",
     username: "",
     password: "",
-    error: null
+    error: null,
+    emailError: null,
+    passwordErrorUpper: null,
+    passwordErrorLength: null,
+    emailAtError: null,
+    usernameError: null,
   };
   onInputChange = event => {
     this.setState({
@@ -15,27 +20,61 @@ class Signup extends React.Component {
     });
   };
 
-  onFormSubmit = event => {
+  onFormSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("https://racunko.herokuapp.com/register", {
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email
-      })
-      .then(response => {
-        console.log(response);
-        this.props.history.push("/login");
-      })
-      .catch(err =>
-        this.setState({
-          username: "",
-          password: "",
-          email: "",
-          error: "Došlo je do greške. Molimo Vas da pokušate ponovo."
+    const psw = this.state.password;
+    var brVelikihSlova = 0;
+    for (let i = 0; i < psw.length; i++) {
+      if (psw[i] === psw[i].toUpperCase()) {
+        if (psw[i] >= 0 || psw[i] <= 9) {
+        } else {
+          brVelikihSlova++;
+        }
+      }
+    }
+    console.log(this.state.email.includes("@"));
+    if (this.state.password.length < 6) {
+      this.setState({
+        passwordErrorLength: "Dužina pasvorda mora imati najmanje 6 karaktera",
+      });
+    } else if (brVelikihSlova === 0) {
+      this.setState({
+        passwordErrorUpper: "Bar jedan karakter mora biti veliko slovo",
+      });
+    } else if (this.state.email === "" || this.state.email === null) {
+      this.setState({
+        emailError: "Molimo Vas da unesete e mail",
+      });
+    } else if (this.state.email.includes("@") === false) {
+      this.setState({
+        emailAtError: "E mail mora sadržati @ karakter",
+      });
+    } else if (this.state.username === "" || this.state.username === null) {
+      this.setState({
+        usernameError: "Molimo Vas da unesete korisničko ime",
+      });
+    } else {
+      axios
+        .post("https://racunko.herokuapp.com/register", {
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email,
         })
-      );
+        .then((response) => {
+          console.log(response);
+          this.props.history.push("/login");
+        })
+        .catch((err) =>
+          this.setState({
+            username: "",
+            password: "",
+            email: "",
+            error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
+          })
+        );
+    }
   };
+
 
   renderError() {
     if (this.state.error) {
@@ -59,7 +98,7 @@ class Signup extends React.Component {
             </span>{" "}
             <span className="header"> Sign up </span>{" "}
             <div className="centralize" style={{ margin: "1%" }}>
-              <div class="ui left icon input login-width">
+              <div className="ui left icon input login-width">
                 <input
                 className="input-login"
                 id="mail"
@@ -68,11 +107,11 @@ class Signup extends React.Component {
                 placeholder="Email"
                 onChange={this.onInputChange}
                 value={this.state.email}
-              /><i class="mail icon"></i>
+              /><i className="mail icon"></i>
               </div>
             </div>
             <div className="centralize" style={{ margin: "1%" }}>
-              <div class="ui left icon input login-width">
+              <div className="ui left icon input login-width">
                 <input
                   type="text"
                   placeholder="Username"
@@ -82,18 +121,18 @@ class Signup extends React.Component {
                   onChange={this.onInputChange}
                   value={this.state.username}
                 />
-                <i class="users icon"></i>
+                <i className="users icon"></i>
               </div>
             </div>
             <div className='centralize' style={{margin:'1%'}}>
-            <div class="ui left icon input login-width">
+            <div className="ui left icon input login-width">
   <input type="password"
   id="pass"
   name="password"
   placeholder="Password"
   onChange={this.onInputChange}
   value={this.state.password}/>
-  <i class="key icon"></i>
+  <i className="key icon"></i>
 </div>
 </div>
             <div className="container-btn">

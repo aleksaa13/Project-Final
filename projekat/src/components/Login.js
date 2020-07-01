@@ -25,9 +25,19 @@ class Login extends React.Component {
       })
       .then((response) => {
         console.log(response);
-        localStorage.setItem("usertoken", response.data.token);
-        localStorage.setItem("username", this.state.username);
-        this.props.history.push("/home");
+        if (response.data.error) {
+          this.setState({
+            username: "",
+            password: "",
+            email: "",
+            error:
+              "Unijeli ste pogrešan pasvord ili korisnicko ime. Molimo Vas probajte ponovo ili se registrujte ukoliko nemate profil.",
+          });
+        } else {
+          localStorage.setItem("usertoken", response.data.token);
+          localStorage.setItem("username", this.state.username);
+          this.props.history.push("/home");
+        }
       })
       .catch((err) =>
         this.setState({
@@ -39,7 +49,6 @@ class Login extends React.Component {
       );
     console.log(this.state.username, this.state.password);
   };
-
   renderError() {
     if (this.state.error) {
       return <h1>{this.state.error}</h1>;
@@ -84,7 +93,7 @@ class Login extends React.Component {
               />{" "}
             </div>{" "} */}
             <div className="centralize" style={{ margin: "1%" }}>
-              <div class="ui left icon input login-width">
+              <div className="ui left icon input login-width">
                 <input
                   type="text"
                   placeholder="Username"
@@ -94,11 +103,11 @@ class Login extends React.Component {
                   onChange={this.onInputChange}
                   value={this.state.username}
                 />
-                <i class="users icon"></i>
+                <i className="users icon"></i>
               </div>
             </div>
             <div className="centralize" style={{ margin: "1%" }}>
-              <div class="ui left icon input login-width">
+              <div className="ui left icon input login-width">
                 <input
                   type="password"
                   id="pass"
@@ -107,7 +116,7 @@ class Login extends React.Component {
                   onChange={this.onInputChange}
                   value={this.state.password}
                 />
-                <i class="key icon"></i>
+                <i className="key icon"></i>
               </div>
             </div>
             <div className="container-btn">

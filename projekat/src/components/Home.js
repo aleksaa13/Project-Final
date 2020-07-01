@@ -32,7 +32,7 @@ class Home extends React.Component {
          year: godina,
      })
         .then((response) => {
-           this.setState({ filterCheck: response.data });
+           this.setState({ filterItems: response.data });
             })
        .catch((err) => console.log(err));
    };
@@ -80,16 +80,16 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <div className="container">
-          <div class="ui secondary  menu">
-            <a class="active item" onClick={this.handleHome}>
+          <div className="ui secondary  menu">
+            <a className="active item" onClick={this.handleHome}>
               Home
             </a>
-            <a class="item" onClick={this.handleFilter}>
+            <a className="item" onClick={this.handleFilter}>
               Filter
             </a>
-            <div class="right menu">
-              <div class="item">
-                <a class="ui item">{this.renderLogOut()}</a>
+            <div className="right menu">
+              <div className="item">
+                <a className="ui item">{this.renderLogOut()}</a>
               </div>
             </div>
           </div>

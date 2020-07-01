@@ -82,71 +82,108 @@ class Rashodi extends React.Component {
       [event.target.name]: event.target.value
     });
   };
-  onFormSubmit = event => {
+  onFormSubmit = (event) => {
     event.preventDefault();
     const usertoken = localStorage.getItem("usertoken");
     const username = localStorage.getItem("username");
-    
-
-    //const headers = { Authorization: "Bearer " + usertoken };
-    axios
-      .post(
-        "https://racunko.herokuapp.com/add",
-
-        {
-          username: username,
-          item: {
-            property: this.state.rashod,
-            amount: this.state.vrijednostrashoda,
-            category: this.state.kategorijarashoda,
-            description: this.state.opisrashoda
+    if (isNaN(this.state.vrijednostrashoda)) {
+      this.setState({
+        rashod: "rashod",
+        kategorijarashoda: "hrana",
+        opisrashoda: "",
+        vrijednostrashoda: "",
+      });
+      alert("Vrijednost rashoda mora biti broj");
+    } else if (this.state.opisrashoda.length > 20) {
+      alert("Opis rashoda može imati maksimum 20 karaktera");
+      this.setState({
+        rashod: "rashod",
+        kategorijarashoda: "hrana",
+        opisrashoda: "",
+        vrijednostrashoda: "",
+      });
+    } else if (
+      this.state.vrijednostrashoda === "" ||
+      this.state.vrijednostrashoda === null ||
+      this.state.vrijednostrashoda === 0
+    ) {
+      alert("Morate unijeti vrijednost");
+      this.setState({
+        rashod: "rashod",
+        kategorijarashoda: "hrana",
+        opisrashoda: "",
+        vrijednostrashoda: "",
+      });
+    } else if (
+      this.state.opisrashoda === "" ||
+      this.state.opisrashoda === null
+    ) {
+      alert("Morate unijeti opis");
+      this.setState({
+        rashod: "rashod",
+        kategorijarashoda: "hrana",
+        opisrashoda: "",
+        vrijednostrashoda: "",
+      });
+    } else {
+      //const headers = { Authorization: "Bearer " + usertoken };
+      axios
+        .post(
+          "https://racunko.herokuapp.com/add",
+          {
+            username: username,
+            item: {
+              property: this.state.rashod,
+              amount: this.state.vrijednostrashoda,
+              category: this.state.kategorijarashoda,
+              description: this.state.opisrashoda,
+            },
           }
-        }
-      )
-      .then(response => {
-        
-        const rashod1 = {
-          id: this.state.svirashodi.length + 1,
-          category: this.state.kategorijarashoda,
-          description: this.state.opisrashoda,
-          amount: this.state.vrijednostrashoda
-        };
-        this.props.podesiRashod(this.state.vrijednostrashoda);
-        
-        rashod1.category === "transport"
-          ? this.setState({
-              transport: this.state.transport + parseInt(rashod1.amount)
-            })
-          : rashod1.category === "edukacija"
-          ? this.setState({
-              edukacija: this.state.edukacija + parseInt(rashod1.amount)
-            })
-          : rashod1.category === "hrana"
-          ? this.setState({
-              hrana: this.state.hrana + parseInt(rashod1.amount)
-            })
-          : this.setState({
-              odjeca: this.state.odjeca + parseInt(rashod1.amount)
-            });
-        this.setState({
-          svirashodi: [...this.state.svirashodi, rashod1],
-          rashod: "rashod",
-          kategorijarashoda: "transport",
-          opisrashoda: "",
-          ukupanRashod:
-            this.state.ukupanRashod + Number(this.state.vrijednostrashoda),
-          vrijednostrashoda: ""
-        });
-      })
-      .catch(err =>
-        this.setState({
-          rashod: "rashod",
-          kategorijarashoda: "hrana",
-          opisprashoda: "",
-          vrijednostrashoda: "",
-          error: "Došlo je do greške. Molimo Vas da pokušate ponovo."
+        )
+        .then((response) => {
+          console.log(response);
+          const rashod1 = {
+            _id: response.data._id,
+            category: this.state.kategorijarashoda,
+            description: this.state.opisrashoda,
+            amount: Number(this.state.vrijednostrashoda),
+          };
+          this.props.podesiRashod(this.state.vrijednostrashoda);
+          rashod1.category === "transport"
+            ? this.setState({
+                transport: this.state.transport + parseInt(rashod1.amount),
+              })
+            : rashod1.category === "edukacija"
+            ? this.setState({
+                edukacija: this.state.edukacija + parseInt(rashod1.amount),
+              })
+            : rashod1.category === "hrana"
+            ? this.setState({
+                hrana: this.state.hrana + parseInt(rashod1.amount),
+              })
+            : this.setState({
+                odjeca: this.state.odjeca + parseInt(rashod1.amount),
+              });
+          this.setState({
+            svirashodi: [...this.state.svirashodi, rashod1],
+            rashod: "rashod",
+            kategorijarashoda: "transport",
+            opisrashoda: "",
+            ukupanRashod:
+              this.state.ukupanRashod + Number(this.state.vrijednostrashoda),
+            vrijednostrashoda: "",
+          });
         })
-      );
+        .catch((err) =>
+          this.setState({
+            rashod: "rashod",
+            kategorijarashoda: "hrana",
+            opisprashoda: "",
+            vrijednostrashoda: "",
+            error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
+          })
+        );
+    }
   };
 
   deleteExpense = (e) => {
