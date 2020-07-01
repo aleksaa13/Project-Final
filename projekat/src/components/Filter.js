@@ -7,7 +7,7 @@ import "../../src/App.css";
 import { Pie } from "react-chartjs-2";
 
 
-const Filter =()=> {
+const Filter =(props)=> {
   const prihodi = props.items.filter((prihod) => prihod.property==='prihod'
   
   );
