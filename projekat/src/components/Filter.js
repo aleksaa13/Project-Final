@@ -5,8 +5,11 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import "../../src/App.css";
 import { Pie } from "react-chartjs-2";
+//import 'moment/locale/sr';
 
 const Filter = (props) => {
+  let bilans=0;
+  let ovajMjesec=moment().locale('sr').format('MMMM');
   const prihodi = props.items.filter((prihod) => prihod.property === "prihod");
   const rashodi = props.items.filter((rashod) => rashod.property === "rashod");
   const plate = prihodi.filter((prihod) => prihod.category === "plata");
@@ -38,6 +41,9 @@ const Filter = (props) => {
   const odjeca = saberi(odjece);
   const edukacija = saberi(edukacije);
   const transport = saberi(transporti);
+  const sviPrihodi=honorar+poklon+plata+renta;
+  const sviRashodi=odjeca+edukacija+transport+hrana;
+  bilans=sviPrihodi-sviRashodi;
 
   function listItems(array) {
     const listItems = array.map((items) => (
@@ -66,8 +72,24 @@ const Filter = (props) => {
 
   return (
     <React.Fragment>
+      <div className='picker centralize'>
       <DatePicker onChange={onChange} picker="month" />
-      <div>
+      </div>
+      <div
+                  className={
+                    bilans < 0
+                      ? "red  container-btn"
+                      : "green container-btn"
+                  }
+                >
+                  {bilans === 0 ? <p>Izaberite mjesec </p>:
+                  <p>Bilans:{bilans}
+                  {`\u20AC`} </p>
+                  }
+                
+      </div>
+      <div className='half-wrap'>
+      <div className='half1'>
         <span className="total">Ukupan prihod:</span>
         <span className="ukupan-prihod">
           {plata + honorar + renta + poklon}
@@ -102,6 +124,8 @@ const Filter = (props) => {
             {listItems(prihodi)}
           </div>
         </div>
+        </div>
+        <div className='half2'>
         <span className="total">Ukupan rashod:</span>
         <span className="ukupan-prihod">
           {transport + odjeca + hrana + edukacija}
@@ -132,10 +156,13 @@ const Filter = (props) => {
             options={{}}
           />
         </div>
-      </div>
+      
       <div id="rashodi" className="list-rashod">
         {listItems(rashodi)}
-      </div>
+        </div>
+        </div>
+        </div>
+        
     </React.Fragment>
   );
 };

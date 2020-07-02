@@ -87,7 +87,7 @@ class Home extends React.Component {
               Home
             </a>
             <a className="item" onClick={this.handleFilter}>
-              Filter
+              ByMonth
             </a>
             <div className="right menu">
               <div className="item">
