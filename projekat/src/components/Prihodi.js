@@ -81,7 +81,11 @@ class Prihodi extends React.Component {
         });
         this.props.podesiPrihod(vrijednost);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        alert(
+          "Izvinjavamo se, došlo je do greške u uspostavljanju konekcije sa sererom"
+        )
+      );
   }
 
   onInputChange = (event) => {
@@ -106,6 +110,14 @@ class Prihodi extends React.Component {
       alert("Vrijednost prihoda mora biti broj");
     } else if (this.state.opisprihoda.length > 20) {
       alert("Opis prihoda može imati maksimum 20 karaktera");
+      this.setState({
+        prihod: "prihod",
+        kategorijaprihoda: "plata",
+        opisprihoda: "",
+        vrijednostprihoda: "",
+      });
+    } else if (this.state.vrijednostprihoda <= 0) {
+      alert("Vrijednost mora biti veća od 0");
       this.setState({
         prihod: "prihod",
         kategorijaprihoda: "plata",
@@ -193,7 +205,7 @@ class Prihodi extends React.Component {
 
   renderError() {
     if (this.state.error) {
-      return <h1>{this.state.error}</h1>;
+      return <h1> {this.state.error} </h1>;
     }
   }
 
@@ -202,9 +214,9 @@ class Prihodi extends React.Component {
     console.log(id);
     const username = localStorage.getItem("username");
     axios
-      .delete("https://racunko.herokuapp.com/delete", {
+      .post("https://racunko.herokuapp.com/delete", {
         username: username,
-        _id: id,
+        id: id,
       })
       .then((response) => {
         console.log(response);
@@ -253,8 +265,8 @@ class Prihodi extends React.Component {
               <span className="price"> {prihod.category} </span>/{" "}
               <span className="price"> {prihod.description} </span>{" "}
               <button type="button" id={prihod._id} onClick={this.deleteIncome}>
-                Obrisi prihod
-              </button>
+                Obrisi prihod{" "}
+              </button>{" "}
             </div>{" "}
           </div>{" "}
         </div>{" "}
@@ -270,12 +282,12 @@ class Prihodi extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <div className="ui card centralize">
             <div className="content">
-              <div className="header">Prihod</div>
-            </div>
+              <div className="header"> Prihod </div>{" "}
+            </div>{" "}
             <div className="content centralize">
               <h4 style={{ textAlign: "center" }} className="ui sub header">
-                Unesite detalje prihoda
-              </h4>
+                Unesite detalje prihoda{" "}
+              </h4>{" "}
               <div className="ui small feed">
                 <div className="event">
                   <div className="content">
@@ -290,10 +302,10 @@ class Prihodi extends React.Component {
                         <option value="renta"> Renta </option>{" "}
                         <option value="honorar"> Honorar </option>{" "}
                         <option value="poklon"> Poklon </option>{" "}
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                      </select>{" "}
+                    </div>{" "}
+                  </div>{" "}
+                </div>{" "}
                 <div className="event">
                   <div className="content">
                     <div className="summary centralize">
@@ -304,11 +316,11 @@ class Prihodi extends React.Component {
                           placeholder="Opis prihoda"
                           onChange={this.onInputChange}
                           value={this.state.opisprihoda}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                        />{" "}
+                      </div>{" "}
+                    </div>{" "}
+                  </div>{" "}
+                </div>{" "}
                 <div className="event">
                   <div className="content">
                     <input
@@ -318,25 +330,25 @@ class Prihodi extends React.Component {
                       placeholder="Unesite vrijednost"
                       onChange={this.onInputChange}
                       value={this.state.vrijednostprihoda}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+                    />{" "}
+                  </div>{" "}
+                </div>{" "}
+              </div>{" "}
+            </div>{" "}
             <div className="extra content">
               <button type="submit" className="ui button">
-                Dodaj Prihod
-              </button>
-            </div>
-          </div>
+                Dodaj Prihod{" "}
+              </button>{" "}
+            </div>{" "}
+          </div>{" "}
           <p>
-            <span className="total">Ukupan prihod:</span>
+            <span className="total"> Ukupan prihod: </span>{" "}
             <span className="ukupan-prihod">
-              {this.state.ukupanPrihod}
-              {`\u20AC`}
-            </span>
-          </p>
-        </form>
+              {" "}
+              {this.state.ukupanPrihod} {`\u20AC`}{" "}
+            </span>{" "}
+          </p>{" "}
+        </form>{" "}
         <div className="chart-wrap-income">
           <Pie
             data={{
@@ -361,9 +373,8 @@ class Prihodi extends React.Component {
             }}
             options={{}}
           />
-
-          <div className="list-prihod">{this.handleIncome()}</div>
-        </div>
+          <div className="list-prihod"> {this.handleIncome()} </div>{" "}
+        </div>{" "}
       </div>
     );
   }

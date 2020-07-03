@@ -118,6 +118,14 @@ class Rashodi extends React.Component {
         opisrashoda: "",
         vrijednostrashoda: "",
       });
+    } else if (this.state.vrijednostrashoda <= 0) {
+      alert("Rashod mora biti vrijednost veća od 0");
+      this.setState({
+        rashod: "rashod",
+        kategorijarashoda: "hrana",
+        opisrashoda: "",
+        vrijednostrashoda: "",
+      });
     } else if (
       this.state.opisrashoda === "" ||
       this.state.opisrashoda === null
@@ -191,14 +199,18 @@ class Rashodi extends React.Component {
     const id = e.target.id;
     const username = localStorage.getItem("username");
     axios
-      .delete("https://racunko.herokuapp.com/delete", {
+      .post("https://racunko.herokuapp.com/delete", {
         username: username,
         id: id,
       })
       .then((response) => {
         console.log(response);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        alert(
+          "Izvinjavamo se, došlo je do greške u uspostavljanju konekcije sa sererom"
+        )
+      );
     const novisvirashodi = this.state.svirashodi.filter(function (rashod) {
       return rashod._id !== id;
     });
@@ -247,8 +259,8 @@ class Rashodi extends React.Component {
                 id={rashod._id}
                 onClick={this.deleteExpense}
               >
-                Obrisi rashod
-              </button>
+                Obrisi rashod{" "}
+              </button>{" "}
             </div>{" "}
           </div>{" "}
         </div>{" "}
@@ -262,12 +274,12 @@ class Rashodi extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <div className="ui card centralize">
             <div className="content">
-              <div className="header">Rashod</div>
-            </div>
+              <div className="header"> Rashod </div>{" "}
+            </div>{" "}
             <div className="content centarlize">
               <h4 style={{ textAlign: "center" }} className="ui sub header">
-                Unesite detalje rashoda
-              </h4>
+                Unesite detalje rashoda{" "}
+              </h4>{" "}
               <div className="ui small feed">
                 <div className="event">
                   <div className="content">
@@ -282,10 +294,10 @@ class Rashodi extends React.Component {
                         <option value="transport"> Transport </option>{" "}
                         <option value="edukacija"> Edukacija </option>{" "}
                         <option value="odjeca"> Odjeca </option>{" "}
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                      </select>{" "}
+                    </div>{" "}
+                  </div>{" "}
+                </div>{" "}
                 <div className="event">
                   <div className="content">
                     <div className="summary centralize">
@@ -296,11 +308,11 @@ class Rashodi extends React.Component {
                           placeholder="Opis rashoda"
                           onChange={this.onInputChange}
                           value={this.state.opisrashoda}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                        />{" "}
+                      </div>{" "}
+                    </div>{" "}
+                  </div>{" "}
+                </div>{" "}
                 <div className="event">
                   <div className="content">
                     <input
@@ -310,25 +322,25 @@ class Rashodi extends React.Component {
                       placeholder="Unesite vrijednost"
                       onChange={this.onInputChange}
                       value={this.state.vrijednostrashoda}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+                    />{" "}
+                  </div>{" "}
+                </div>{" "}
+              </div>{" "}
+            </div>{" "}
             <div className="extra content">
               <button type="submit" className="ui button">
-                Dodaj Rashod
-              </button>
-            </div>
-          </div>
+                Dodaj Rashod{" "}
+              </button>{" "}
+            </div>{" "}
+          </div>{" "}
           <p>
-            <span className="total">Ukupan rashod:</span>
+            <span className="total"> Ukupan rashod: </span>{" "}
             <span className="ukupan-rashod">
-              {this.state.ukupanRashod}
-              {`\u20AC`}
-            </span>
-          </p>
-        </form>
+              {" "}
+              {this.state.ukupanRashod} {`\u20AC`}{" "}
+            </span>{" "}
+          </p>{" "}
+        </form>{" "}
         <div className="chart-wrap-expense">
           <Pie
             data={{
@@ -353,9 +365,8 @@ class Rashodi extends React.Component {
             }}
             options={{}}
           />
-
-          <div className="list-rashod">{this.handleExpense()}</div>
-        </div>
+          <div className="list-rashod"> {this.handleExpense()} </div>{" "}
+        </div>{" "}
       </div>
     );
   }

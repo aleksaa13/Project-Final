@@ -14,13 +14,24 @@ class Signup extends React.Component {
     emailAtError: null,
     usernameError: null,
   };
-  onInputChange = event => {
+  onInputChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   onFormSubmit = (event) => {
+    this.setState({
+      username: "",
+      password: "",
+      email: "",
+      error: null,
+      emailError: null,
+      passwordErrorUpper: null,
+      passwordErrorLength: null,
+      emailAtError: null,
+      usernameError: null,
+    });
     event.preventDefault();
     const psw = this.state.password;
     var brVelikihSlova = 0;
@@ -32,14 +43,14 @@ class Signup extends React.Component {
         }
       }
     }
-    console.log(this.state.email.includes("@"));
     if (this.state.password.length < 6) {
       this.setState({
         passwordErrorLength: "Dužina pasvorda mora imati najmanje 6 karaktera",
       });
     } else if (brVelikihSlova === 0) {
       this.setState({
-        passwordErrorUpper: "Bar jedan karakter mora biti veliko slovo",
+        passwordErrorUpper:
+          "Bar jedan karakter pasvorda mora biti veliko slovo",
       });
     } else if (this.state.email === "" || this.state.email === null) {
       this.setState({
@@ -64,21 +75,31 @@ class Signup extends React.Component {
           console.log(response);
           this.props.history.push("/login");
         })
-        .catch((err) =>
-          this.setState({
-            username: "",
-            password: "",
-            email: "",
-            error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
-          })
-        );
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 403) {
+            this.setState({
+              username: "",
+              password: "",
+              email: "",
+              error:
+                "Unijeti username ili mail već postoje. Molimo Vas da izaberete novi.",
+            });
+          } else {
+            this.setState({
+              username: "",
+              password: "",
+              email: "",
+              error: "Došlo je do greške. Molimo Vas da pokušate ponovo.",
+            });
+          }
+        });
     }
   };
 
-
   renderError() {
     if (this.state.error) {
-      return <h1>{this.state.error}</h1>;
+      return <h1 style={{ color: "red" }}> {this.state.error} </h1>;
     }
   }
   render() {
@@ -100,16 +121,18 @@ class Signup extends React.Component {
             <div className="centralize" style={{ margin: "1%" }}>
               <div className="ui left icon input login-width">
                 <input
-                className="input-login"
-                id="mail"
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={this.onInputChange}
-                value={this.state.email}
-              /><i className="mail icon"></i>
-              </div>
-            </div>
+                  className="input-login"
+                  id="mail"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={this.onInputChange}
+                  value={this.state.email}
+                />
+                <i className="mail icon"></i>
+              </div>{" "}
+              {this.state.emailError} {this.state.emailAtError}{" "}
+            </div>{" "}
             <div className="centralize" style={{ margin: "1%" }}>
               <div className="ui left icon input login-width">
                 <input
@@ -120,26 +143,34 @@ class Signup extends React.Component {
                   placeholder="Username"
                   onChange={this.onInputChange}
                   value={this.state.username}
-                />
-                <i className="users icon"></i>
-              </div>
-            </div>
-            <div className='centralize' style={{margin:'1%'}}>
-            <div className="ui left icon input login-width">
-  <input type="password"
-  id="pass"
-  name="password"
-  placeholder="Password"
-  onChange={this.onInputChange}
-  value={this.state.password}/>
-  <i className="key icon"></i>
-</div>
-</div>
+                />{" "}
+                <i className="users icon"> </i>{" "}
+              </div>{" "}
+              {this.state.usernameError}
+            </div>{" "}
+            <div className="centralize" style={{ margin: "1%" }}>
+              <div className="ui left icon input login-width">
+                <input
+                  type="password"
+                  id="pass"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.onInputChange}
+                  value={this.state.password}
+                />{" "}
+                <i className="key icon"> </i>{" "}
+              </div>{" "}
+              <p style={{ color: "white" }}>
+                Pasvord mora sadržati najmanje 6 karaktera i bar jedno veliko
+                slovo
+              </p>
+              {this.state.passwordErrorLength} {this.state.passwordErrorUpper}
+            </div>{" "}
             <div className="container-btn">
               <button className="ui button"> Signup </button>{" "}
             </div>{" "}
           </form>{" "}
-          {this.renderError()}
+          {this.renderError()}{" "}
         </div>{" "}
       </div>
     );
