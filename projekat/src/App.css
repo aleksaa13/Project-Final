@@ -235,10 +235,6 @@ a {
 
 .centerTitle{
     text-align: center;
-    margin:50px;
-    border: 1px solid white;
-    border-radius: 5px;
-    margin: auto;
 }
 
 .input-number-prihod {
@@ -252,18 +248,40 @@ a {
 
 .ukupan-prihod {
     /* color: #11998e; */
-    /* color: #0d776e; */
-    color: #0a5838;
-    margin: auto;
-    font-size: 3em;
+    color: #0d772d;
+    /* color: #0a5838; */
+    /* margin: auto; */
+    font-size: 2em;
+    font-weight: bold;
+    /* margin: 3px; */
+}
+.ukupni-ras{
+    /* background-color:gray; */
+    text-align: center;
+    /* box-shadow: 0px 0px 2px 2px red inset */
+    /* border: 2px solid red; */
+    /* border-bottom: none; */
+    /* border-bottom-left-radius: 5px; */
+    /* border-bottom-right-radius: 5px; */
+}
+.ukupni-pri{
+    /* background-color:gray; */
+    /* background-color: #33333310; */
+    text-align: center;
+    /* box-shadow: 0px 0px 2px 2px green inset */
+    /* border: 2px solid green; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: none;
 }
 .content {
     margin-bottom: 0 !important;
 }
 
 .ukupan-rashod {
-    font-size: 3em;
+    font-size: 2em;
     color: red;
+    font-weight: bold;
 }
 
 .input-number-rashod {
@@ -304,6 +322,7 @@ a {
     font-size: 2em;
     font-weight: 200;
     font-family: "Comic Sans MS", curisive, sans-serif;
+    /* color: white; */
 }
 
 .chart-wrap-expense {
@@ -313,11 +332,14 @@ a {
     border-radius: 5px;
 }
 
-.chart-wrap-income {
+.chart-wrap-income{
     background-color: white;
     /* box-shadow: 1px 1px 20px green inset; */
     box-shadow: 0px 0px 2px 2px green inset;
     border-radius: 5px;
+}
+.chart-wrap-income hr, .chart-wrap-expense hr{
+    width: 70%;
 }
 
 .component-wrap {

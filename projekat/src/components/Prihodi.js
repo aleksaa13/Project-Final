@@ -327,7 +327,7 @@ class Prihodi extends React.Component {
                       className="input-number-prihod"
                       type="number"
                       name="vrijednostprihoda"
-                      placeholder="Unesite vrijednost"
+                      placeholder="Unesite vrijednost €"
                       onChange={this.onInputChange}
                       value={this.state.vrijednostprihoda}
                       min="0"
@@ -342,15 +342,23 @@ class Prihodi extends React.Component {
               </button>{" "}
             </div>{" "}
           </div>{" "}
-          <p>
+          {/* <p>
             <span className="total"> Ukupan prihod  </span>{" "}
             <span className="ukupan-prihod">
               {" "}
               {this.state.ukupanPrihod} {`\u20AC`}{" "}
             </span>{" "}
-          </p>{" "}
+          </p>{" "} */}
         </form>{" "}
         <div className="chart-wrap-income">
+          <div className="ukupni-pri">
+            {/* <span className="total">+</span>{" "} */}
+            <span className="ukupan-prihod">
+              {" "}
+              +{this.state.ukupanPrihod} {`\u20AC`}{" "}
+            </span>{" "}
+          </div>{" "}
+          <hr></hr>{" "}
           <Pie
             data={{
               labels: ["Plata", "Renta", "Honorar", "Poklon"],

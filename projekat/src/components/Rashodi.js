@@ -319,7 +319,7 @@ class Rashodi extends React.Component {
                       className="input-number-rashod"
                       type="number"
                       name="vrijednostrashoda"
-                      placeholder="Unesite vrijednost"
+                      placeholder="Unesite vrijednost €"
                       onChange={this.onInputChange}
                       value={this.state.vrijednostrashoda}
                       min="0"
@@ -334,15 +334,23 @@ class Rashodi extends React.Component {
               </button>{" "}
             </div>{" "}
           </div>{" "}
-          <p>
+          {/* <p>
             <span className="total"> Ukupan rashod  </span>{" "}
             <span className="ukupan-rashod">
               {" "}
               {this.state.ukupanRashod} {`\u20AC`}{" "}
             </span>{" "}
-          </p>{" "}
+          </p>{" "} */}
         </form>{" "}
         <div className="chart-wrap-expense">
+        <div className="ukupni-ras">
+            {/* <span className="total">-</span>{" "} */}
+            <span className="ukupan-rashod">
+              {" "}
+              -{this.state.ukupanRashod} {`\u20AC`}{" "}
+            </span>{" "}
+          </div>{" "}
+          <hr></hr>{" "}
           <Pie
             data={{
               labels: ["Transport", "Odjeca", "Edukacija", "Hrana"],

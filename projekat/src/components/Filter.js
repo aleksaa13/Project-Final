@@ -90,14 +90,21 @@ const Filter = (props) => {
       </div> */}
       <div className='half-wrap'>
       <div className='half1'>
-        <div className="centerTitle">
+        {/* <div className="centerTitle">
           <span className="total">Ukupan prihod  </span>
           <span className="ukupan-prihod">
             {plata + honorar + renta + poklon}
             {`\u20AC`}
           </span>
-        </div>
+        </div> */}
         <div className="chart-wrap-income">
+          <div className="centerTitle">
+            <span className="ukupan-prihod">
+              +{plata + honorar + renta + poklon}
+              {`\u20AC`}
+            </span>
+          </div>
+          <hr></hr>{" "}
           <Pie
             data={{
               labels: ["Plata", "Renta", "Honorar", "Poklon"],
@@ -127,14 +134,22 @@ const Filter = (props) => {
         </div>
         </div>
         <div className='half2'>
-          <div className="centerTitle">
+          {/* <div className="centerTitle">
             <span className="total">Ukupan rashod  </span>
             <span className="ukupan-rashod">
               {transport + odjeca + hrana + edukacija}
               {`\u20AC`}
             </span>
-          </div>
+          </div> */}
         <div className="chart-wrap-expense">
+        <div className="centerTitle">
+            {/* <span className="total">Ukupan rashod  </span> */}
+            <span className="ukupan-rashod">
+              -{transport + odjeca + hrana + edukacija}
+              {`\u20AC`}
+            </span>
+          </div>
+          <hr></hr>{" "}
           <Pie
             data={{
               labels: ["Transport", "Odjeca", "Edukacija", "Hrana"],
