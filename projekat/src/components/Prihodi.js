@@ -330,6 +330,7 @@ class Prihodi extends React.Component {
                       placeholder="Unesite vrijednost"
                       onChange={this.onInputChange}
                       value={this.state.vrijednostprihoda}
+                      min="0"
                     />{" "}
                   </div>{" "}
                 </div>{" "}
@@ -342,7 +343,7 @@ class Prihodi extends React.Component {
             </div>{" "}
           </div>{" "}
           <p>
-            <span className="total"> Ukupan prihod: </span>{" "}
+            <span className="total"> Ukupan prihod  </span>{" "}
             <span className="ukupan-prihod">
               {" "}
               {this.state.ukupanPrihod} {`\u20AC`}{" "}

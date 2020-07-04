@@ -75,7 +75,7 @@ const Filter = (props) => {
       <div className='picker centralize'>
       <DatePicker onChange={onChange} picker="month" />
       </div>
-      <div
+      {/* <div
                   className={
                     bilans < 0
                       ? "red  container-btn"
@@ -87,15 +87,16 @@ const Filter = (props) => {
                   {`\u20AC`} </p>
                   }
                 
-      </div>
+      </div> */}
       <div className='half-wrap'>
       <div className='half1'>
-        <span className="total">Ukupan prihod:</span>
-        <span className="ukupan-prihod">
-          {plata + honorar + renta + poklon}
-          {`\u20AC`}
-        </span>
-
+        <div className="centerTitle">
+          <span className="total">Ukupan prihod  </span>
+          <span className="ukupan-prihod">
+            {plata + honorar + renta + poklon}
+            {`\u20AC`}
+          </span>
+        </div>
         <div className="chart-wrap-income">
           <Pie
             data={{
@@ -126,11 +127,13 @@ const Filter = (props) => {
         </div>
         </div>
         <div className='half2'>
-        <span className="total">Ukupan rashod:</span>
-        <span className="ukupan-prihod">
-          {transport + odjeca + hrana + edukacija}
-          {`\u20AC`}
-        </span>
+          <div className="centerTitle">
+            <span className="total">Ukupan rashod  </span>
+            <span className="ukupan-rashod">
+              {transport + odjeca + hrana + edukacija}
+              {`\u20AC`}
+            </span>
+          </div>
         <div className="chart-wrap-expense">
           <Pie
             data={{
