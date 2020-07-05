@@ -10,13 +10,14 @@ import Filter from "./Filter";
 class Home extends React.Component {
   state = {
     token: localStorage.getItem("usertoken"),
-    budzet: 0,
     sviprihodi: [],
     svirashodi: [],
     prihodiirashodi: [],
     filter: "false",
     filterItems: [],
     isLoading: true,
+    prihodi: 0,
+    rashodi: 0,
   };
 
   componentDidMount() {
@@ -46,12 +47,12 @@ class Home extends React.Component {
   getFilterData = (dateString) => {
     let godina = dateString.slice(0, 4);
     let mesec = dateString.slice(5);
-    console.log(mesec);
+
     let mjesec = moment()
       .month(parseInt(mesec - 1))
       .format("MMM");
     /* axios */
-    console.log(mjesec);
+
     const username = localStorage.getItem("username");
     axios
       .post("https://racunko.herokuapp.com/filter", {
@@ -70,19 +71,28 @@ class Home extends React.Component {
   handleHome = () => {
     this.setState({ filter: "false" });
   };
-  podesiPrihod = (prihod) => {
-    console.log(this.state.budzet);
+  podesiPrihod2 = (prihod) => {
     this.setState({
-      budzet:this.state.budzet + Number(prihod)
-      });
-    console.log(this.state.budzet)
+      prihodi: this.state.prihodi + prihod,
+    });
+  };
+
+  podesiPrihod = (prihod) => {
+    this.setState({
+      prihodi: prihod,
+    });
+  };
+
+  podesiRashod2 = (rashod) => {
+    this.setState({
+      rashodi: this.state.rashodi + rashod,
+    });
   };
 
   podesiRashod = (rashod) => {
     this.setState({
-      budzet: this.state.budzet - Number(rashod),
+      rashodi: rashod,
     });
-    console.log(this.state.budzet)
   };
   renderContent() {
     if (this.state.token === null || this.state.token === "undefined") {
@@ -124,7 +134,8 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.prihodi);
+    console.log(this.state.rashodi);
     return (
       <React.Fragment>
         {this.state.isLoading === true ? (
@@ -171,26 +182,35 @@ class Home extends React.Component {
                   </span>{" "}
                   <div className="half-wrap">
                     <div className="half1">
-                      <Prihodi podesiPrihod={this.podesiPrihod} />{" "}
+                      <Prihodi
+                        podesiPrihod={this.podesiPrihod}
+                        podesiPrihod2={this.podesiPrihod2}
+                      />{" "}
                     </div>{" "}
                     <div className="half2">
-                      <Rashodi podesiRashod={this.podesiRashod} />{" "}
+                      <Rashodi
+                        podesiRashod={this.podesiRashod}
+                        podesiRashod2={this.podesiRashod2}
+                      />{" "}
                     </div>{" "}
                   </div>{" "}
                   <div
                     className={
-                      this.state.budzet < 0
-                        ? "red  container-btn"
-                        : "green container-btn"
+                      this.state.prihodi - this.state.rashodi > 0
+                        ? "green  container-btn"
+                        : this.state.prihodi - this.state.rashodi < 0 ?
+
+                        "red container-btn" :
+                        "container-btn"
                     }
                   >
                     {" "}
-                    {this.state.budzet} {`\u20AC`}{" "}
+                    {this.state.prihodi - this.state.rashodi}
+                    {`\u20AC`}
                   </div>{" "}
                 </div>
               )}{" "}
-            </div>
-            {" "}
+            </div>{" "}
           </div>
         )}
       </React.Fragment>

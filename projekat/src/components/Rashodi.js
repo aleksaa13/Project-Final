@@ -157,7 +157,7 @@ class Rashodi extends React.Component {
             description: this.state.opisrashoda,
             amount: Number(this.state.vrijednostrashoda),
           };
-          this.props.podesiRashod(this.state.vrijednostrashoda);
+          this.props.podesiRashod2(this.state.vrijednostrashoda);
           rashod1.category === "transport"
             ? this.setState({
                 transport: this.state.transport + parseInt(rashod1.amount),
@@ -182,6 +182,7 @@ class Rashodi extends React.Component {
               this.state.ukupanRashod + Number(this.state.vrijednostrashoda),
             vrijednostrashoda: "",
           });
+          this.props.podesiRashod(this.state.ukupanRashod);
         })
         .catch((err) =>
           this.setState({
@@ -235,11 +236,11 @@ class Rashodi extends React.Component {
     //  this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
     //  this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)})
 
-    var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
+    //var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
     this.setState({
       ukupanRashod: vrijednost,
     });
-    this.props.podesiRashod(umanjenje);
+    this.props.podesiRashod(vrijednost);
     this.mapIncome(novisvirashodi);
   };
   handleExpense() {

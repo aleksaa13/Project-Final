@@ -165,7 +165,6 @@ class Prihodi extends React.Component {
             description: this.state.opisprihoda,
             amount: Number(this.state.vrijednostprihoda),
           };
-          this.props.podesiPrihod(this.state.vrijednostprihoda);
           prihod1.category === "plata"
             ? this.setState({
                 plata: this.state.plata + parseInt(prihod1.amount),
@@ -181,6 +180,7 @@ class Prihodi extends React.Component {
             : this.setState({
                 renta: this.state.renta + parseInt(prihod1.amount),
               });
+
           this.setState({
             sviprihodi: [...this.state.sviprihodi, prihod1],
             prihod: "prihod",
@@ -190,6 +190,7 @@ class Prihodi extends React.Component {
               this.state.ukupanPrihod + Number(this.state.vrijednostprihoda),
             vrijednostprihoda: "",
           });
+          this.props.podesiPrihod(this.state.ukupanPrihod);
         })
         .catch((err) =>
           this.setState({
@@ -244,11 +245,11 @@ class Prihodi extends React.Component {
     //  this.setState({honorar:this.state.honorar-parseInt(obrisaniPrihod.amount)}) :
     //  this.setState({poklon:this.state.poklon-parseInt(obrisaniPrihod.amount)})
 
-    var umanjenje = vrijednost - this.state.ukupanPrihod;
+    //var umanjenje = vrijednost - this.state.ukupanPrihod;
     this.setState({
       ukupanPrihod: vrijednost,
     });
-    this.props.podesiPrihod(umanjenje);
+    this.props.podesiPrihod(vrijednost);
     this.mapIncome(novisviprihodi);
   };
 
