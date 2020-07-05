@@ -260,7 +260,8 @@ class Rashodi extends React.Component {
                 id={rashod._id}
                 onClick={this.deleteExpense}
               >
-                Obrisi rashod{" "}
+                {/* izbrisi{" "} */}
+                <i class="fa fa-trash" aria-hidden="true"></i>{" "}
               </button>{" "}
             </div>{" "}
           </div>{" "}

@@ -266,7 +266,8 @@ class Prihodi extends React.Component {
               <span className="price"> {prihod.category} </span>/{" "}
               <span className="price"> {prihod.description} </span>{" "}
               <button className='obrisi' type="button" id={prihod._id} onClick={this.deleteIncome}>
-                Obrisi prihod{" "}
+              {/* izbrisi{" "}  */}
+              <i class="fa fa-trash" aria-hidden="true"></i>{" "}
               </button>{" "}
             </div>{" "}
           </div>{" "}
