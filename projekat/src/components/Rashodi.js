@@ -254,7 +254,7 @@ class Rashodi extends React.Component {
             <div className="meta">
               <span className="price"> {rashod.category} </span>/{" "}
               <span className="price"> {rashod.description} </span>{" "}
-              <button
+              <button className='obrisi'
                 type="button"
                 id={rashod._id}
                 onClick={this.deleteExpense}
@@ -351,6 +351,7 @@ class Rashodi extends React.Component {
             </span>{" "}
           </div>{" "}
           <hr></hr>{" "}
+          <div className='pie-chart'>
           <Pie
             data={{
               labels: ["Transport", "Odjeca", "Edukacija", "Hrana"],
@@ -372,8 +373,13 @@ class Rashodi extends React.Component {
                 },
               ],
             }}
-            options={{}}
+            options={{
+              size:{
+                height:'600px',
+              }
+            }}
           />
+          </div>
           <div className="list-rashod"> {this.handleExpense()} </div>{" "}
         </div>{" "}
       </div>

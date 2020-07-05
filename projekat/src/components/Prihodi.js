@@ -34,7 +34,7 @@ class Prihodi extends React.Component {
           ? (poklon = poklon + parseInt(el.amount))
           : el.category === "renta"
           ? (renta = renta + parseInt(el.amount))
-          : console.log("micko");
+          : console.log('micko')
       }
     });
 
@@ -68,14 +68,14 @@ class Prihodi extends React.Component {
           return prihod.property === "prihod";
         });
         this.setState({
-          sviprihodi: postojeciprihodi,
+          sviprihodi: postojeciprihodi
         });
 
-        var vrijednost = 0;
-        for (var i = 0; i < this.state.sviprihodi.length; i++) {
+        let vrijednost = 0;
+        for (let i = 0; i < this.state.sviprihodi.length; i++) {
           vrijednost = vrijednost + this.state.sviprihodi[i].amount;
         }
-
+        console.log(vrijednost);
         this.setState({
           ukupanPrihod: vrijednost,
         });
@@ -264,7 +264,7 @@ class Prihodi extends React.Component {
             <div className="meta">
               <span className="price"> {prihod.category} </span>/{" "}
               <span className="price"> {prihod.description} </span>{" "}
-              <button type="button" id={prihod._id} onClick={this.deleteIncome}>
+              <button className='obrisi' type="button" id={prihod._id} onClick={this.deleteIncome}>
                 Obrisi prihod{" "}
               </button>{" "}
             </div>{" "}
@@ -359,6 +359,7 @@ class Prihodi extends React.Component {
             </span>{" "}
           </div>{" "}
           <hr></hr>{" "}
+          <div className='pie-chart'>
           <Pie
             data={{
               labels: ["Plata", "Renta", "Honorar", "Poklon"],
@@ -382,6 +383,7 @@ class Prihodi extends React.Component {
             }}
             options={{}}
           />
+          </div>
           <div className="list-prihod"> {this.handleIncome()} </div>{" "}
         </div>{" "}
       </div>

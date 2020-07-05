@@ -173,10 +173,11 @@ const Filter = (props) => {
             }}
             options={{}}
           />
-        </div>
+        
       
       <div id="rashodi" className="list-rashod">
         {listItems(rashodi)}
+        </div>
         </div>
         </div>
         </div>

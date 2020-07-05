@@ -71,15 +71,18 @@ class Home extends React.Component {
     this.setState({ filter: "false" });
   };
   podesiPrihod = (prihod) => {
+    console.log(this.state.budzet);
     this.setState({
-      budzet: this.state.budzet + Number(prihod),
-    });
+      budzet:this.state.budzet + Number(prihod)
+      });
+    console.log(this.state.budzet)
   };
 
   podesiRashod = (rashod) => {
     this.setState({
       budzet: this.state.budzet - Number(rashod),
     });
+    console.log(this.state.budzet)
   };
   renderContent() {
     if (this.state.token === null || this.state.token === "undefined") {
@@ -121,6 +124,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         {this.state.isLoading === true ? (

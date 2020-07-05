@@ -27,6 +27,11 @@ button {
     width: 190px;
 }
 
+.obrisi{
+    width:auto;
+    color:white;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -330,6 +335,7 @@ a {
     /* box-shadow: 1px 1px 20px red inset; */
     box-shadow: 0px 0px 2px 2px red inset;
     border-radius: 5px;
+    width:90%;
 }
 
 .chart-wrap-income{
@@ -337,6 +343,7 @@ a {
     /* box-shadow: 1px 1px 20px green inset; */
     box-shadow: 0px 0px 2px 2px green inset;
     border-radius: 5px;
+    width:90%;
 }
 .chart-wrap-income hr, .chart-wrap-expense hr{
     width: 70%;
@@ -385,4 +392,7 @@ a {
 
 .picker {
     width: 100%;
+}
+.pie-chart{
+    height:50%;
 }
