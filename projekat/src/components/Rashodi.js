@@ -253,15 +253,15 @@ class Rashodi extends React.Component {
               {rashod.amount} {`\u20AC`}{" "}
             </div>{" "}
             <div className="meta">
-              <span className="price"> {rashod.category} </span>/{" "}
-              <span className="price"> {rashod.description} </span>{" "}
+              <span className="price">Kategorija: <span className="transformCat">{rashod.category}</span>{" "} </span>{" "}
+              <br></br>
+    <span className="price">Opis: <span className="transformDes">{rashod.description}</span>{" "}</span>{" "}
               <button className='obrisi'
                 type="button"
                 id={rashod._id}
                 onClick={this.deleteExpense}
-              >
-                {/* izbrisi{" "} */}
-                <i class="fa fa-trash" aria-hidden="true"></i>{" "}
+              >X{" "}
+               {/* <i class="fa fa-trash" aria-hidden="true"></i>{" "} */}
               </button>{" "}
             </div>{" "}
           </div>{" "}

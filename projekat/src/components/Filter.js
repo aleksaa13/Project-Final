@@ -55,8 +55,9 @@ const Filter = (props) => {
               {items.amount} {`\u20AC`}{" "}
             </div>{" "}
             <div className="meta">
-              <span className="price"> {items.category} </span>/{" "}
-              <span className="price"> {items.description} </span>{" "}
+            <span className="price">Kategorija: <span className="transformCat">{items.category}</span>{" "} </span>{" "}
+              <br></br>
+              <span className="price">Opis: <span className="transformDes">{items.description}</span>{" "} </span>{" "}
             </div>{" "}
           </div>{" "}
         </div>{" "}

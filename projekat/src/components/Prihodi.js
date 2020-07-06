@@ -263,11 +263,12 @@ class Prihodi extends React.Component {
               {prihod.amount} {`\u20AC`}{" "}
             </div>{" "}
             <div className="meta">
-              <span className="price"> {prihod.category} </span>/{" "}
-              <span className="price"> {prihod.description} </span>{" "}
+    <span className="price">Kategorija:  <span className="transformCat">{prihod.category}</span>{" "}</span>{" "}
+              <br></br>
+              <span className="price">Opis:  <span className="transformDes">{prihod.description}</span>{" "} </span>{" "}
               <button className='obrisi' type="button" id={prihod._id} onClick={this.deleteIncome}>
-              {/* izbrisi{" "}  */}
-              <i class="fa fa-trash" aria-hidden="true"></i>{" "}
+              X{" "} 
+              {/* <i class="fa fa-trash" aria-hidden="true"></i>{" "} */}
               </button>{" "}
             </div>{" "}
           </div>{" "}
