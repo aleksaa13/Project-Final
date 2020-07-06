@@ -53,6 +53,7 @@ button {
 .items:hover{
     /* background-color: #11998e50; */
     background-color: #33333340;
+    
     border-radius: 5px;
     /* background-color: #b4b4b450; */
 }
@@ -115,6 +116,16 @@ button:hover {
     height: auto;
 }
 
+.thisUsername{
+    color: #fff;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+
 #round {
     border-radius: 50%;
     width: 90%;
@@ -129,13 +140,12 @@ button:hover {
 
 .header {
     font-family: "Arial";
-    font-size: 30px;
+    font-size: 35px;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
     align-items: center;
     font-style: italic;
-    margin-top: 15px;
     color: white;
 }
 
@@ -349,7 +359,8 @@ a {
 }
 
  .green {
-   color: #38ef7d;
+   /* color: #38ef7d; */
+   color: #086610;
 } 
 
 .total {

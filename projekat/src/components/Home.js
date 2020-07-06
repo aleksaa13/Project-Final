@@ -180,6 +180,7 @@ class Home extends React.Component {
                     {" "}
                     {moment().format("MMMM")}{" "}
                   </span>{" "}
+                  <span className="thisUsername">@{localStorage.getItem("username")}</span>
                   <div className="half-wrap">
                     <div className="half1">
                       <Prihodi
