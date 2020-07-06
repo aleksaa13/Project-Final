@@ -8,7 +8,7 @@ input {
 
 input::placeholder {
     color: #fff;
-    padding-left: 5%;
+    /* padding-left: 5%; */
 
 }
 
@@ -136,6 +136,13 @@ button:hover {
     font-family: Arial;
     font-size: 30px;
     text-transform: uppercase;
+}
+
+.date{
+    color: white;
+    position: absolute;
+    left: 76vw;
+    top: 7vw;
 }
 
 .header {
@@ -356,11 +363,12 @@ a {
 
 .red {
     color: #93291e;
+    border: 1px solid #93291e;
 }
 
  .green {
-   /* color: #38ef7d; */
-   color: #086610;
+   color: #38ef7d;
+   border: 1px solid #38ef7d;
 } 
 
 .total {
@@ -435,4 +443,12 @@ a {
 }
 .pie-chart{
     height:50%;
+}
+
+.balans{
+    margin-top: 15px;
+    margin-bottom: -10px;
+    background-color: #55555590;
+    border-radius: 50%;
+    width: 30%;
 }

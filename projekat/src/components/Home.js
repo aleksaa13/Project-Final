@@ -176,6 +176,7 @@ class Home extends React.Component {
                 ></Filter>
               ) : (
                 <div>
+                  <span className="date">{moment().format("DD MMMM YYYY")}{" "}</span>{" "}
                   <span className="header" style={{ marginBottom: 10 }}>
                     {" "}
                     {moment().format("MMMM")}{" "}
@@ -198,11 +199,11 @@ class Home extends React.Component {
                   <div
                     className={
                       this.state.prihodi - this.state.rashodi > 0
-                        ? "green  container-btn"
+                        ? "green  container-btn balans"
                         : this.state.prihodi - this.state.rashodi < 0 ?
 
-                        "red container-btn" :
-                        "container-btn"
+                        "red container-btn balans" :
+                        "container-btn balans"
                     }
                   >
                     {" "}
