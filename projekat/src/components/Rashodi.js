@@ -205,44 +205,31 @@ class Rashodi extends React.Component {
         id: id,
       })
       .then((response) => {
-        console.log(response);
+        const novisvirashodi = this.state.svirashodi.filter(function (rashod) {
+          return rashod._id !== id;
+        });
+        this.setState({
+          svirashodi: novisvirashodi,
+        });
+
+        var vrijednost = 0;
+        for (var i = 0; i < novisvirashodi.length; i++) {
+          vrijednost = vrijednost + parseInt(novisvirashodi[i].amount);
+        }
+
+        this.setState({
+          ukupanRashod: vrijednost,
+        });
+        this.props.podesiRashod(vrijednost);
+        this.mapIncome(novisvirashodi);
       })
       .catch((err) =>
         alert(
           "Izvinjavamo se, došlo je do greške u uspostavljanju konekcije sa sererom"
         )
       );
-    const novisvirashodi = this.state.svirashodi.filter(function (rashod) {
-      return rashod._id !== id;
-    });
-    this.setState({
-      svirashodi: novisvirashodi,
-    });
-
-    var vrijednost = 0;
-    for (var i = 0; i < novisvirashodi.length; i++) {
-      vrijednost = vrijednost + parseInt(novisvirashodi[i].amount);
-    }
-
-    // const obrisaniRashod=this.state.svirashodi.filter((items)=>{
-    //   return items._id === id;
-    // });
-
-    // obrisaniRashod.category==='transport' ?
-    // this.setState({transport:this.state.transport-parseInt(obrisaniRashod.amount)}) :
-    //  obrisaniRashod.category==='odjeca' ?
-    //  this.setState({odjeca:this.state.odjeca-parseInt(obrisaniRashod.amount)}) :
-    //  obrisaniRashod.category==='edukacija' ?
-    //  this.setState({edukacija:this.state.edukacija-parseInt(obrisaniRashod.amount)}) :
-    //  this.setState({hrana:this.state.hrana-parseInt(obrisaniRashod.amount)})
-
-    //var umanjenje = vrijednost - parseInt(this.state.ukupanRashod);
-    this.setState({
-      ukupanRashod: vrijednost,
-    });
-    this.props.podesiRashod(vrijednost);
-    this.mapIncome(novisvirashodi);
   };
+
   handleExpense() {
     const listItems = this.state.svirashodi.map((rashod) => (
       <div key={rashod._id} className="ui items">
@@ -253,15 +240,21 @@ class Rashodi extends React.Component {
               {rashod.amount} {`\u20AC`}{" "}
             </div>{" "}
             <div className="meta">
-              <span className="price">Kategorija: <span className="transformCat">{rashod.category}</span>{" "} </span>{" "}
+              <span className="price">
+                Kategorija:{" "}
+                <span className="transformCat">{rashod.category}</span>{" "}
+              </span>{" "}
               <br></br>
-    <span className="price">Opis: <span className="transformDes">{rashod.description}</span>{" "}</span>{" "}
-              <button className='obrisi'
+              <span className="price">
+                Opis: <span className="transformDes">{rashod.description}</span>{" "}
+              </span>{" "}
+              <button
+                className="obrisi"
                 type="button"
                 id={rashod._id}
                 onClick={this.deleteExpense}
-              >X{" "}
-               {/* <i class="fa fa-trash" aria-hidden="true"></i>{" "} */}
+              >
+                X {/* <i class="fa fa-trash" aria-hidden="true"></i>{" "} */}
               </button>{" "}
             </div>{" "}
           </div>{" "}
@@ -345,7 +338,7 @@ class Rashodi extends React.Component {
           </p>{" "} */}
         </form>{" "}
         <div className="chart-wrap-expense">
-        <div className="ukupni-ras">
+          <div className="ukupni-ras">
             {/* <span className="total">-</span>{" "} */}
             <span className="ukupan-rashod">
               {" "}
@@ -353,34 +346,39 @@ class Rashodi extends React.Component {
             </span>{" "}
           </div>{" "}
           <hr></hr>{" "}
-          <div className='pie-chart'>
-          <Pie
-            data={{
-              labels: ["Transport", "Odjeca", "Edukacija", "Hrana"],
-              datasets: [
-                {
-                  data: [
-                    this.state.transport,
-                    this.state.odjeca,
-                    this.state.edukacija,
-                    this.state.hrana,
-                  ],
-                  backgroundColor: ["#ffc2c3", "#fe7773", "#e81e25", "#0e0301"],
-                  hoverBackgroundColor: [
-                    "#bfe6ff",
-                    "#bfe6ff",
-                    "#bfe6ff",
-                    "#bfe6ff",
-                  ],
+          <div className="pie-chart">
+            <Pie
+              data={{
+                labels: ["Transport", "Odjeca", "Edukacija", "Hrana"],
+                datasets: [
+                  {
+                    data: [
+                      this.state.transport,
+                      this.state.odjeca,
+                      this.state.edukacija,
+                      this.state.hrana,
+                    ],
+                    backgroundColor: [
+                      "#ffc2c3",
+                      "#fe7773",
+                      "#e81e25",
+                      "#0e0301",
+                    ],
+                    hoverBackgroundColor: [
+                      "#bfe6ff",
+                      "#bfe6ff",
+                      "#bfe6ff",
+                      "#bfe6ff",
+                    ],
+                  },
+                ],
+              }}
+              options={{
+                size: {
+                  height: "600px",
                 },
-              ],
-            }}
-            options={{
-              size:{
-                height:'600px',
-              }
-            }}
-          />
+              }}
+            />
           </div>
           <div className="list-rashod"> {this.handleExpense()} </div>{" "}
         </div>{" "}

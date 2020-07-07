@@ -131,7 +131,9 @@ class Signup extends React.Component {
                 />
                 <i className="mail icon"></i>
               </div>{" "}
-              {this.state.emailError} {this.state.emailAtError}{" "}
+              <p style={{ color: "red", fontWeight: "bold" }}>
+                {this.state.emailError} {this.state.emailAtError}
+              </p>
             </div>{" "}
             <div className="centralize" style={{ margin: "1%" }}>
               <div className="ui left icon input login-width">
@@ -146,7 +148,9 @@ class Signup extends React.Component {
                 />{" "}
                 <i className="users icon"> </i>{" "}
               </div>{" "}
-              {this.state.usernameError}
+              <p style={{ color: "red", fontWeight: "bold" }}>
+                {this.state.usernameError}{" "}
+              </p>
             </div>{" "}
             <div className="centralize" style={{ margin: "1%" }}>
               <div className="ui left icon input login-width">
@@ -164,7 +168,9 @@ class Signup extends React.Component {
                 Pasvord mora sadržati najmanje 6 karaktera i bar jedno veliko
                 slovo
               </p>
-              {this.state.passwordErrorLength} {this.state.passwordErrorUpper}
+              <p style={{ color: "red", fontWeight: "bold" }}>
+                {this.state.passwordErrorLength} {this.state.passwordErrorUpper}{" "}
+              </p>
             </div>{" "}
             <div className="container-btn">
               <button className="ui button"> Signup </button>{" "}

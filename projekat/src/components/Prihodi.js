@@ -34,7 +34,7 @@ class Prihodi extends React.Component {
           ? (poklon = poklon + parseInt(el.amount))
           : el.category === "renta"
           ? (renta = renta + parseInt(el.amount))
-          : console.log('micko')
+          : console.log("micko");
       }
     });
 
@@ -68,7 +68,7 @@ class Prihodi extends React.Component {
           return prihod.property === "prihod";
         });
         this.setState({
-          sviprihodi: postojeciprihodi
+          sviprihodi: postojeciprihodi,
         });
 
         let vrijednost = 0;
@@ -220,37 +220,24 @@ class Prihodi extends React.Component {
         id: id,
       })
       .then((response) => {
-        console.log(response);
+        const novisviprihodi = this.state.sviprihodi.filter(function (prihod) {
+          return prihod._id !== id;
+        });
+        this.setState({
+          sviprihodi: novisviprihodi,
+        });
+        var vrijednost = 0;
+        for (var i = 0; i < novisviprihodi.length; i++) {
+          vrijednost = vrijednost + parseInt(novisviprihodi[i].amount);
+        }
+
+        this.setState({
+          ukupanPrihod: vrijednost,
+        });
+        this.props.podesiPrihod(vrijednost);
+        this.mapIncome(novisviprihodi);
       })
       .catch((err) => console.log(err));
-    const novisviprihodi = this.state.sviprihodi.filter(function (prihod) {
-      return prihod._id !== id;
-    });
-    this.setState({
-      sviprihodi: novisviprihodi,
-    });
-    var vrijednost = 0;
-    for (var i = 0; i < novisviprihodi.length; i++) {
-      vrijednost = vrijednost + parseInt(novisviprihodi[i].amount);
-    }
-    // const obrisaniPrihod=this.state.sviprihodi.filter((items)=>{
-    //   return items._id === id;
-    // });
-
-    // obrisaniPrihod.category==='plata' ?
-    // this.setState({plata:this.state.plata-parseInt(obrisaniPrihod.amount)}) :
-    //  obrisaniPrihod.category==='renta' ?
-    //  this.setState({renta:this.state.renta-parseInt(obrisaniPrihod.amount)}) :
-    //  obrisaniPrihod.category==='honorar' ?
-    //  this.setState({honorar:this.state.honorar-parseInt(obrisaniPrihod.amount)}) :
-    //  this.setState({poklon:this.state.poklon-parseInt(obrisaniPrihod.amount)})
-
-    //var umanjenje = vrijednost - this.state.ukupanPrihod;
-    this.setState({
-      ukupanPrihod: vrijednost,
-    });
-    this.props.podesiPrihod(vrijednost);
-    this.mapIncome(novisviprihodi);
   };
 
   handleIncome() {
@@ -263,12 +250,21 @@ class Prihodi extends React.Component {
               {prihod.amount} {`\u20AC`}{" "}
             </div>{" "}
             <div className="meta">
-    <span className="price">Kategorija:  <span className="transformCat">{prihod.category}</span>{" "}</span>{" "}
+              <span className="price">
+                Kategorija:{" "}
+                <span className="transformCat">{prihod.category}</span>{" "}
+              </span>{" "}
               <br></br>
-              <span className="price">Opis:  <span className="transformDes">{prihod.description}</span>{" "} </span>{" "}
-              <button className='obrisi' type="button" id={prihod._id} onClick={this.deleteIncome}>
-              X{" "} 
-              {/* <i class="fa fa-trash" aria-hidden="true"></i>{" "} */}
+              <span className="price">
+                Opis: <span className="transformDes">{prihod.description}</span>{" "}
+              </span>{" "}
+              <button
+                className="obrisi"
+                type="button"
+                id={prihod._id}
+                onClick={this.deleteIncome}
+              >
+                X {/* <i class="fa fa-trash" aria-hidden="true"></i>{" "} */}
               </button>{" "}
             </div>{" "}
           </div>{" "}
@@ -362,30 +358,35 @@ class Prihodi extends React.Component {
             </span>{" "}
           </div>{" "}
           <hr></hr>{" "}
-          <div className='pie-chart'>
-          <Pie
-            data={{
-              labels: ["Plata", "Renta", "Honorar", "Poklon"],
-              datasets: [
-                {
-                  data: [
-                    this.state.plata,
-                    this.state.renta,
-                    this.state.honorar,
-                    this.state.poklon,
-                  ],
-                  backgroundColor: ["#d1ede1", "#7bc5ae", "#028c6a", "#003e19"],
-                  hoverBackgroundColor: [
-                    "#bfe6ff",
-                    "#bfe6ff",
-                    "#bfe6ff",
-                    "#bfe6ff",
-                  ],
-                },
-              ],
-            }}
-            options={{}}
-          />
+          <div className="pie-chart">
+            <Pie
+              data={{
+                labels: ["Plata", "Renta", "Honorar", "Poklon"],
+                datasets: [
+                  {
+                    data: [
+                      this.state.plata,
+                      this.state.renta,
+                      this.state.honorar,
+                      this.state.poklon,
+                    ],
+                    backgroundColor: [
+                      "#d1ede1",
+                      "#7bc5ae",
+                      "#028c6a",
+                      "#003e19",
+                    ],
+                    hoverBackgroundColor: [
+                      "#bfe6ff",
+                      "#bfe6ff",
+                      "#bfe6ff",
+                      "#bfe6ff",
+                    ],
+                  },
+                ],
+              }}
+              options={{}}
+            />
           </div>
           <div className="list-prihod"> {this.handleIncome()} </div>{" "}
         </div>{" "}
